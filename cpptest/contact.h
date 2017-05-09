@@ -7,11 +7,18 @@ using namespace std;
 
 class Contact
 {
-    string name;
-    vector<string> numbers;
+    char* name;
+    char** numbers;
+    size_t size;
 public:
+    Contact();
     Contact(const char* name, const char* num);
-    Contact(const char* name, const vector<string> nums);
+    Contact(const char* name, const char** nums, size_t size);
+    Contact(const Contact& copy);
+
+    void addNumber(const char* num);
+    void addNumber(const char** num, size_t size);
+    void clean();
     void show();
 };
 
