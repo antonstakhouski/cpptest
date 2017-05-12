@@ -5,6 +5,8 @@
 #include <vector>
 #include <cstdlib>
 #include <cstring>
+#include <QLayout>
+#include <QListWidget>
 
 using namespace std;
 
@@ -30,6 +32,11 @@ int main(int argc, char *argv[])
     noname.addNumber((const char**)nums, size);
     noname.show();
 
+    Contact** conts = new Contact*[2];
+    conts[0] = &vasya;
+    conts[1] = &ivan;
+    conts[2] = &noname;
+
     //contacts.push_back(vasya);
     //vector<string> nums = {"+3754422233444", "+3752988877444"};
 
@@ -40,6 +47,8 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     MainWindow w;
+    w.initContactList(conts, 3);
+
     w.show();
 
     return a.exec();

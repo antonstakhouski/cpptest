@@ -17,6 +17,14 @@ Contact::Contact(){
     this->size = 1;
 }
 
+Contact::~Contact(){
+    free(name);
+    for(size_t i = 0; i < this->size; i++){
+        free(this->numbers[i]);
+    }
+    free(this->numbers);
+}
+
 Contact::Contact(const char* name, const char* num)
 {
     this->name = (char*)malloc(sizeof(char) * strlen(name));
@@ -56,10 +64,12 @@ void Contact::show(){
 
 void Contact::clean(){
     free(this->name);
+    this->name = 0;
     for(size_t i = 0; i < size; i++){
         free(this->numbers[i]);
     }
     free(this->numbers);
+    this->numbers = 0;
     this->size = 0;
 }
 
@@ -99,4 +109,12 @@ void Contact::addNumber(const char** num, size_t size){
         strcpy(tmp, num[j]);
         this->numbers[i] = tmp;
     }
+}
+
+char* Contact::getName(){
+    return name;
+}
+
+char** Contact::getNums(){
+    return numbers;
 }

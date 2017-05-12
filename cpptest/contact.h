@@ -12,9 +12,13 @@ class Contact
     size_t size;
 public:
     Contact();
+    ~Contact();
     Contact(const char* name, const char* num);
     Contact(const char* name, const char** nums, size_t size);
     Contact(const Contact& copy);
+
+    char* getName();
+    char** getNums();
 
     void addNumber(const char* num);
     void addNumber(const char** num, size_t size);
