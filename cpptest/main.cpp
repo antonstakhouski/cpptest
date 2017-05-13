@@ -1,5 +1,6 @@
 #include "mainwindow.h"
 #include "contact.h"
+#include "WidgetWithButton.h"
 
 #include <QApplication>
 #include <QLayout>
@@ -49,6 +50,7 @@ int main(int argc, char *argv[])
     //w.initContactList(conts, 3);
 
     w.show();
-
+    WidgetWithButton b;
+    b.show();
     return a.exec();
 }

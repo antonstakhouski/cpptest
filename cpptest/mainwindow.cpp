@@ -31,7 +31,7 @@ void MainWindow::printMessage(){
     this->numbers->addItems(lst);
 }
 
-void MainWindow::initContactList(Contact** contacts, size_t size){
+void MainWindow::initContactList(Contact **contacts, size_t size){
     QStringList lst;
     for(size_t i = 0; i < size; i++){
         this->contVec.push_back(contacts[i]);
