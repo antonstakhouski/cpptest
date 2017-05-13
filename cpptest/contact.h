@@ -12,7 +12,7 @@ using namespace std;
 class Contact
 {
 public:
-    Contact();
+    explicit Contact();
     ~Contact();
     Contact(const char* name, const char* num);
     Contact(const char* name, const char** nums, size_t size);

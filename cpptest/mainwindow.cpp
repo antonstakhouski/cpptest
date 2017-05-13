@@ -1,8 +1,3 @@
-#include <QGridLayout>
-#include <QListWidget>
-#include <vector>
-#include <QTimer>
-#include <cstdio>
 #include "mainwindow.h"
 #include "ui_mainwindow.h"
 
@@ -20,6 +15,7 @@ MainWindow::MainWindow(QWidget *parent) :
     windowLayout->addWidget(numbers, 0, 1);
 
     btn = new QPushButton("Push");
+
     connect(btn, SIGNAL(clicked()), this, SLOT(printMessage()));
     windowLayout->addWidget(btn, 1, 0);
 

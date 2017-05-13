@@ -1,13 +1,19 @@
 #ifndef MAINWINDOW_H
 #define MAINWINDOW_H
 
+#include "contact.h"
+
 #include <QMainWindow>
 #include <QGridLayout>
 #include <QListWidget>
 #include <QPushButton>
 #include <QTimer>
 #include <vector>
-#include "contact.h"
+#include <QGridLayout>
+#include <QListWidget>
+#include <vector>
+#include <QTimer>
+#include <cstdio>
 
 using namespace std;
 
@@ -19,6 +25,8 @@ class MainWindow : public QWidget
     QListWidget* numbers;
     vector<Contact*> contVec;
     QPushButton* btn;
+
+private slots:
     void printMessage();
 
 public:

@@ -11,30 +11,30 @@ using namespace std;
 
 int main(int argc, char *argv[])
 {
-    Contact vasya("Vasya", "+375291112233");
-    vasya.show();
+//    Contact vasya("Vasya", "+375291112233");
+//    vasya.show();
 
-    char** nums;
-    size_t size = 2;
-    nums = (char**)malloc(sizeof(char*) * size);
-    nums[0] = (char*)malloc(sizeof(char) * strlen("hello"));
-    strcpy(nums[0], "hello");
-    nums[1] = (char*)malloc(sizeof(char) * strlen("world"));
-    strcpy(nums[1], "world");
-    Contact ivan("Ivan", (const char**)nums, size);
-    ivan.show();
+//    char** nums;
+//    size_t size = 2;
+//    nums = (char**)malloc(sizeof(char*) * size);
+//    nums[0] = (char*)malloc(sizeof(char) * strlen("hello"));
+//    strcpy(nums[0], "hello");
+//    nums[1] = (char*)malloc(sizeof(char) * strlen("world"));
+//    strcpy(nums[1], "world");
+//    Contact ivan("Ivan", (const char**)nums, size);
+//    ivan.show();
 
-    Contact noname;
-    noname.show();
-    noname = vasya;
-    noname.addNumber("666");
-    noname.addNumber((const char**)nums, size);
-    noname.show();
+//    Contact noname;
+//    noname.show();
+//    noname = vasya;
+//    noname.addNumber("666");
+//    noname.addNumber((const char**)nums, size);
+//    noname.show();
 
-    Contact** conts = new Contact*[2];
-    conts[0] = &vasya;
-    conts[1] = &ivan;
-    conts[2] = &noname;
+//    Contact** conts = new Contact*[2];
+//    conts[0] = &vasya;
+//    conts[1] = &ivan;
+//    conts[2] = &noname;
 
     //contacts.push_back(vasya);
     //vector<string> nums = {"+3754422233444", "+3752988877444"};
@@ -46,7 +46,7 @@ int main(int argc, char *argv[])
 
     QApplication a(argc, argv);
     MainWindow w;
-    w.initContactList(conts, 3);
+    //w.initContactList(conts, 3);
 
     w.show();
 
