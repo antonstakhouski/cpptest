@@ -1,12 +1,11 @@
 #include "mainwindow.h"
-#include <QApplication>
 #include "contact.h"
-#include <iostream>
-#include <vector>
-#include <cstdlib>
-#include <cstring>
+
+#include <QApplication>
 #include <QLayout>
 #include <QListWidget>
+
+#include <iostream>
 
 using namespace std;
 

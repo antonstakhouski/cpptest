@@ -1,5 +1,9 @@
 #ifndef CONTACT_H
 #define CONTACT_H
+
+#include <iostream>
+#include <cstdlib>
+#include <cstring>
 #include <string>
 #include <vector>
 
@@ -7,9 +11,6 @@ using namespace std;
 
 class Contact
 {
-    char* name;
-    char** numbers;
-    size_t size;
 public:
     Contact();
     ~Contact();
@@ -24,6 +25,11 @@ public:
     void addNumber(const char** num, size_t size);
     void clean();
     void show();
+
+private:
+    char* name;
+    char** numbers;
+    size_t size;
 };
 
 #endif // CONTACT_H
