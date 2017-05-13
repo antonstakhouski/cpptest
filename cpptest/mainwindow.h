@@ -4,6 +4,8 @@
 #include <QMainWindow>
 #include <QGridLayout>
 #include <QListWidget>
+#include <QPushButton>
+#include <QTimer>
 #include <vector>
 #include "contact.h"
 
@@ -16,10 +18,13 @@ class MainWindow : public QWidget
     QListWidget* contacts;
     QListWidget* numbers;
     vector<Contact*> contVec;
+    QPushButton* btn;
+    void printMessage();
 
 public:
     explicit MainWindow(QWidget *parent = 0);
     void initContactList(Contact** contacts, size_t size);
+    void reloadNumTable();
     ~MainWindow();
 };
 
