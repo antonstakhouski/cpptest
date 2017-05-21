@@ -23,9 +23,12 @@ DEFINES += QT_DEPRECATED_WARNINGS
 #DEFINES += QT_DISABLE_DEPRECATED_BEFORE=0x060000    # disables all the APIs deprecated before Qt 6.0.0
 
 
-SOURCES += *.cpp
+SOURCES += *.cpp \
+    studentcard.cpp
 
-HEADERS  += *.h
+HEADERS  += *.h \
+    studentcard.h \
+    date.h
 
 FORMS    += mainwindow.ui \
     WidgetWithButton.ui
