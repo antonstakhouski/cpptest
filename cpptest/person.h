@@ -8,17 +8,20 @@ using namespace std;
 class Person
 {
 public:
-    explicit Person();
-    Person(string _lastName, string _firstName, string _middleName, string _id);
+    Person();
+    explicit Person(/*string _lastName, string _firstName, string _middleName,*/ string _id);
     Person(const Person& copy);
     ~Person();
 
+    virtual void addName() = 0;
+    virtual void addSex() = 0;
+    virtual void addAge() = 0;
     void show();
 
 private:
-    string firstName;
-    string middleName;
-    string lastName;
+    string firstName = 0;
+    string middleName = 0;
+    string lastName = 0;
     string id;
 
 };
