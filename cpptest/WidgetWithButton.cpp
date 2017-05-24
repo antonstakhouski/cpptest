@@ -53,38 +53,99 @@ void WidgetWithButton::moveAway()
     int resX;
     int resY;
 
-    int noRight = 0;
-    int noLeft = 0;
-    int noUp= 0;
-    int noDown= 0;
+    enum direction { STAY, LEFT, RIGHT, UP, DOWN, BOTTOMLEFT, BOTTOMRIGHT, TOPLEFT, TOPRIGHT};
+
+    direction xDir = STAY;
+    direction yDir = STAY;
+    direction finalDir = STAY;
 
     if (rx <= btnWidth / 2){
         if (btnX + 2 * btnWidth >= widgetWidth) {
-            resX = btnX;
+            xDir = STAY;
         } else {
-            resX = btnX + btnWidth;
+            xDir = RIGHT;
         }
     } else {
         if (btnX - btnWidth <= 0) {
-            resX = btnX;
+            xDir = STAY;
         } else {
-            resX = btnX - btnWidth;
+            xDir = LEFT;
         }
     }
 
     if(ry <= btnHeight / 2) {
         if (btnY + 2 * btnHeight >= widgetHeight){
-            resY = btnY;
+            yDir = STAY;
         } else {
-            resY = btnY + btnHeight;
+            yDir = DOWN;
         }
     } else {
         if (btnY - btnHeight <= 0) {
-            resY = btnY;
+            yDir = STAY;
         } else {
-            resY = btnY - btnHeight;
+            yDir = UP;
         }
     }
+
+    if (xDir == LEFT && yDir == STAY )
+        finalDir = LEFT;
+    if (xDir == RIGHT && yDir == STAY )
+        finalDir = RIGHT;
+    if (xDir == STAY && yDir == UP)
+        finalDir = UP ;
+    if (xDir == STAY && yDir == DOWN)
+        finalDir = DOWN;
+
+    if (xDir == LEFT && yDir == UP)
+        finalDir = TOPLEFT;
+    if (xDir == RIGHT && yDir == UP)
+        finalDir = TOPRIGHT;
+    if (xDir == LEFT && yDir == DOWN)
+        finalDir = BOTTOMLEFT;
+    if (xDir == RIGHT && yDir == DOWN)
+        finalDir = BOTTOMRIGHT;
+    if (xDir == STAY && yDir == STAY)
+        finalDir = STAY;
+
+    switch (finalDir) {
+    case LEFT:
+        resX = btnX - btnWidth;
+        resY = btnY;
+        break;
+    case RIGHT:
+        resX = btnX + btnWidth;
+        resY = btnY;
+        break;
+    case UP:
+        resX = btnX;
+        resY = btnY - btnHeight;
+        break;
+    case DOWN:
+        resX = btnX;
+        resY = btnY + btnHeight;
+        break;
+    case TOPLEFT:
+        resX = btnX - btnWidth;
+        resY = btnY - btnHeight;
+        break;
+    case TOPRIGHT:
+        resX = btnX + btnWidth;
+        resY = btnY - btnHeight;
+        break;
+    case BOTTOMLEFT:
+        resX = btnX - btnWidth;
+        resY = btnY + btnHeight;
+        break;
+    case BOTTOMRIGHT:
+        resX = btnX + btnWidth;
+        resY = btnY + btnHeight;
+        break;
+    default:
+        resX = btnX;
+        resY = btnY;
+        break;
+    }
+
 
 //    int resX = btnX + btnWidth;
 //    int resY = btnY + ry;
