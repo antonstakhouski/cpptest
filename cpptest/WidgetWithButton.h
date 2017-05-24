@@ -3,6 +3,7 @@
 
 #include <QWidget>
 #include <QPushButton>
+#include <QEnterEvent>
 #include "enterhandler.h"
 
 namespace Ui {
@@ -13,26 +14,22 @@ class WidgetWithButton : public QWidget
 {
     Q_OBJECT
 
-private:
-    EnterHandler enterHandler;
 public:
     explicit WidgetWithButton(QWidget *parent = 0);
     ~WidgetWithButton();
 public slots:
-    void moveAway();
+    void moveAway(QPoint pos);
     void btnClicked();
 
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
-public:
-
-
-Q_SIGNALS:
+signals:
     void hovered();
 
 private:
     Ui::WidgetWithButton *ui;
+    EnterHandler enterHandler;
 };
 
 #endif // WIDGETWITHBUTTON_H

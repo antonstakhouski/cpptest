@@ -25,12 +25,12 @@ void WidgetWithButton::btnClicked()
     cout << "You WIN!" << endl;
 }
 
-void WidgetWithButton::moveAway()
+void WidgetWithButton::moveAway(QPoint pos)
 {
-    QPoint p = this->mapFromGlobal(QCursor::pos());
-    int x = p.x();
-    int y = p.y();
-    int* res = new int[2];
+    QPoint globalMousePos = pos;
+    int x = globalMousePos.x();
+    int y = globalMousePos.y();
+    int* res = new int[2];//TODO: add delete
     enterHandler.moveAway(x,
                           y,
                           ui->pushButton->x(),
@@ -44,13 +44,15 @@ void WidgetWithButton::moveAway()
                           res
                           );
     ui->pushButton->move(res[0], res[1]);
+
 }
 
 bool WidgetWithButton::eventFilter(QObject *obj, QEvent *event)
 {
     if (obj == (QObject*)ui->pushButton) {
         if (event->type() == QEvent::Enter) {
-            moveAway();
+            QEnterEvent *e = reinterpret_cast<QEnterEvent*>(event);
+            moveAway(e->globalPos());
         }
     }
     return QWidget::eventFilter(obj, event);

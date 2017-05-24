@@ -1,7 +1,6 @@
 #ifndef ENTERHANDLER_H
 #define ENTERHANDLER_H
 
-
 class EnterHandler
 {
 public:
