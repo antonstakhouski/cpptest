@@ -53,16 +53,37 @@ void WidgetWithButton::moveAway()
     int resX;
     int resY;
 
+    int noRight = 0;
+    int noLeft = 0;
+    int noUp= 0;
+    int noDown= 0;
+
     if (rx <= btnWidth / 2){
-        resX = btnX + btnWidth;
+        if (btnX + 2 * btnWidth >= widgetWidth) {
+            resX = btnX;
+        } else {
+            resX = btnX + btnWidth;
+        }
     } else {
-        resX = btnX - btnWidth;
+        if (btnX - btnWidth <= 0) {
+            resX = btnX;
+        } else {
+            resX = btnX - btnWidth;
+        }
     }
 
     if(ry <= btnHeight / 2) {
-        resY = btnY + btnHeight;
+        if (btnY + 2 * btnHeight >= widgetHeight){
+            resY = btnY;
+        } else {
+            resY = btnY + btnHeight;
+        }
     } else {
-        resY = btnY - btnHeight;
+        if (btnY - btnHeight <= 0) {
+            resY = btnY;
+        } else {
+            resY = btnY - btnHeight;
+        }
     }
 
 //    int resX = btnX + btnWidth;
