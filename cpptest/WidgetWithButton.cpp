@@ -38,6 +38,9 @@ void WidgetWithButton::moveAway()
     int widgetX = this->x();
     int widgetY = this->y();
 
+    widgetX = this->mapFromGlobal(this->pos()).x();
+    widgetY = this->mapFromGlobal(this->pos()).y();
+
     int btnX = ui->pushButton->x();
     int btnY = ui->pushButton->y();
 
@@ -47,8 +50,8 @@ void WidgetWithButton::moveAway()
     int rx = x - btnX;
     int ry = y - btnY;
 
-    cout << rx << endl;
-    cout << ry << endl;
+//    cout << widgetX << endl;
+//    cout << widgetY << endl;
 
     int resX;
     int resY;
@@ -66,7 +69,7 @@ void WidgetWithButton::moveAway()
             xDir = RIGHT;
         }
     } else {
-        if (btnX - btnWidth <= 0) {
+        if (btnX - btnWidth <= widgetX) {
             xDir = STAY;
         } else {
             xDir = LEFT;
@@ -80,7 +83,7 @@ void WidgetWithButton::moveAway()
             yDir = DOWN;
         }
     } else {
-        if (btnY - btnHeight <= 0) {
+        if (btnY - btnHeight <= widgetY) {
             yDir = STAY;
         } else {
             yDir = UP;
@@ -104,8 +107,16 @@ void WidgetWithButton::moveAway()
         finalDir = BOTTOMLEFT;
     if (xDir == RIGHT && yDir == DOWN)
         finalDir = BOTTOMRIGHT;
-    if (xDir == STAY && yDir == STAY)
-        finalDir = STAY;
+    if (xDir == STAY && yDir == STAY) {
+        if (btnX > widgetWidth / 2 && btnY < widgetHeight / 2)
+            finalDir = DOWN;
+        if (btnX > widgetWidth / 2 && btnY > widgetHeight / 2)
+            finalDir = LEFT;
+        if (btnX < widgetWidth / 2 && btnY > widgetHeight / 2)
+            finalDir = UP;
+        if (btnX < widgetWidth / 2 && btnY < widgetHeight / 2)
+            finalDir = RIGHT;
+    }
 
     switch (finalDir) {
     case LEFT:
@@ -146,13 +157,7 @@ void WidgetWithButton::moveAway()
         break;
     }
 
-
-//    int resX = btnX + btnWidth;
-//    int resY = btnY + ry;
-
-
     ui->pushButton->move(resX, resY);
-    cout << "hovered" << endl;
 }
 
 bool WidgetWithButton::eventFilter(QObject *obj, QEvent *event)
