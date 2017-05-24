@@ -3,5 +3,5 @@
 !*.cpp
 !*.pro
 !*.ui
-
+build-*
 *.user
