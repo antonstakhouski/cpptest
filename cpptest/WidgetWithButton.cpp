@@ -13,6 +13,11 @@ WidgetWithButton::WidgetWithButton(QWidget *parent) :
     //    setFixedSize(size());
     ui->setupUi(this);
     ui->pushButton->installEventFilter(this);
+
+    btnHeight = ui->pushButton->height();
+    btnWidth = ui->pushButton->width();
+    trickyOffset = 10;
+
     connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(btnClicked()));
 }
 
@@ -26,6 +31,52 @@ void WidgetWithButton::btnClicked()
     cout << "You WIN!" << endl;
 }
 
+void WidgetWithButton::moveToDir(int btnX, int btnY, direction finalDir, int* res)
+{
+    int resX;
+    int resY;
+    switch (finalDir) {
+    case LEFT:
+        resX = btnX - btnWidth - trickyOffset;
+        resY = btnY;
+        break;
+    case RIGHT:
+        resX = btnX + btnWidth + trickyOffset;;
+        resY = btnY;
+        break;
+    case UP:
+        resX = btnX;
+        resY = btnY - btnHeight - trickyOffset;;
+        break;
+    case DOWN:
+        resX = btnX;
+        resY = btnY + btnHeight + trickyOffset;;
+        break;
+    case TOPLEFT:
+        resX = btnX - btnWidth;
+        resY = btnY - btnHeight - trickyOffset;;
+        break;
+    case TOPRIGHT:
+        resX = btnX + btnWidth;
+        resY = btnY - btnHeight - trickyOffset;;
+        break;
+    case BOTTOMLEFT:
+        resX = btnX - btnWidth;
+        resY = btnY + btnHeight + trickyOffset;;
+        break;
+    case BOTTOMRIGHT:
+        resX = btnX + btnWidth;
+        resY = btnY + btnHeight + trickyOffset;;
+        break;
+    default:
+        resX = btnX;
+        resY = btnY;
+        break;
+    }
+    res[0] = resX;
+    res[1] = resY;
+}
+
 void WidgetWithButton::moveAway()
 {
     QPoint p = this->mapFromGlobal(QCursor::pos());
@@ -33,8 +84,6 @@ void WidgetWithButton::moveAway()
     int x = p.x();
     int y = p.y();
 
-    int btnHeight = ui->pushButton->height();
-    int btnWidth = ui->pushButton->width();
 
     int widgetX = this->x();
     int widgetY = this->y();
@@ -54,16 +103,10 @@ void WidgetWithButton::moveAway()
     //    cout << widgetX << endl;
     //    cout << widgetY << endl;
 
-    int resX;
-    int resY;
-
-    enum direction { STAY, LEFT, RIGHT, UP, DOWN, BOTTOMLEFT, BOTTOMRIGHT, TOPLEFT, TOPRIGHT};
-
     direction xDir = STAY;
     direction yDir = STAY;
     direction finalDir = STAY;
 
-    int trickyOffset = 10;
 
     if (rx <= btnWidth / 2){
         if (btnX + 2 * btnWidth + trickyOffset >= widgetWidth) {
@@ -165,46 +208,10 @@ void WidgetWithButton::moveAway()
         }
     }
 
-    switch (finalDir) {
-    case LEFT:
-        resX = btnX - btnWidth - trickyOffset;
-        resY = btnY;
-        break;
-    case RIGHT:
-        resX = btnX + btnWidth + trickyOffset;;
-        resY = btnY;
-        break;
-    case UP:
-        resX = btnX;
-        resY = btnY - btnHeight - trickyOffset;;
-        break;
-    case DOWN:
-        resX = btnX;
-        resY = btnY + btnHeight + trickyOffset;;
-        break;
-    case TOPLEFT:
-        resX = btnX - btnWidth;
-        resY = btnY - btnHeight - trickyOffset;;
-        break;
-    case TOPRIGHT:
-        resX = btnX + btnWidth;
-        resY = btnY - btnHeight - trickyOffset;;
-        break;
-    case BOTTOMLEFT:
-        resX = btnX - btnWidth;
-        resY = btnY + btnHeight + trickyOffset;;
-        break;
-    case BOTTOMRIGHT:
-        resX = btnX + btnWidth;
-        resY = btnY + btnHeight + trickyOffset;;
-        break;
-    default:
-        resX = btnX;
-        resY = btnY;
-        break;
-    }
-
-    ui->pushButton->move(resX, resY);
+    int* res = new int[2];
+    moveToDir(btnX, btnY, finalDir, res);
+    ui->pushButton->move(res[0], res[1]);
+    delete(res);
 }
 
 bool WidgetWithButton::eventFilter(QObject *obj, QEvent *event)

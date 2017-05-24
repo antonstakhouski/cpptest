@@ -22,11 +22,18 @@ public slots:
 protected:
     bool eventFilter(QObject *obj, QEvent *event);
 
-public: Q_SIGNALS:
+public:
+
+Q_SIGNALS:
     void hovered();
 
 private:
     Ui::WidgetWithButton *ui;
+    enum direction { STAY, LEFT, RIGHT, UP, DOWN, BOTTOMLEFT, BOTTOMRIGHT, TOPLEFT, TOPRIGHT};
+    int btnWidth;
+    int btnHeight;
+    int trickyOffset;
+    void moveToDir(int btnX, int btnY, direction finalDir, int* res);
 };
 
 #endif // WIDGETWITHBUTTON_H
