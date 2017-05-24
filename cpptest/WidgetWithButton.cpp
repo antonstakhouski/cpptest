@@ -17,10 +17,6 @@ WidgetWithButton::WidgetWithButton(QWidget *parent) :
     btnHeight = ui->pushButton->height();
     btnWidth = ui->pushButton->width();
     trickyOffset = 10;
-    widgetHeight = this->size().height();
-    widgetWidth = this->size().width();
-    widgetX = this->mapFromGlobal(this->pos()).x();
-    widgetY = this->mapFromGlobal(this->pos()).y();
 
     connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(btnClicked()));
 }
@@ -35,50 +31,91 @@ void WidgetWithButton::btnClicked()
     cout << "You WIN!" << endl;
 }
 
+void WidgetWithButton::moveLeft(int btnX, int btnY, int* res)
+{
+    res[0] = btnX - btnWidth - trickyOffset;
+    res[1] = btnY;
+}
+
+void WidgetWithButton::moveRight(int btnX, int btnY, int* res)
+{
+    res[0] = btnX + btnWidth + trickyOffset;
+    res[1] = btnY;
+}
+
+void WidgetWithButton::moveUp(int btnX, int btnY, int* res)
+{
+    res[0] = btnX;
+    res[1] = btnY - btnHeight - trickyOffset;
+}
+
+void WidgetWithButton::moveDown(int btnX, int btnY, int* res)
+{
+    res[0] = btnX;
+    res[1] = btnY + btnHeight + trickyOffset;
+}
+
+void WidgetWithButton::moveTopLeft(int btnX, int btnY, int* res)
+{
+    res[0] = btnX - btnWidth - trickyOffset;
+    res[1] = btnY - btnHeight - trickyOffset;
+}
+
+void WidgetWithButton::moveTopRight(int btnX, int btnY, int* res)
+{
+    res[0] = btnX + btnWidth + trickyOffset;
+    res[1] = btnY - btnHeight - trickyOffset;
+}
+
+void WidgetWithButton::moveBottomLeft(int btnX, int btnY, int* res)
+{
+    res[0] = btnX - btnWidth - trickyOffset;
+    res[1] = btnY + btnHeight + trickyOffset;
+}
+
+void WidgetWithButton::moveBottomRight(int btnX, int btnY, int* res)
+{
+    res[0] = btnX + btnWidth + trickyOffset;
+    res[1] = btnY + btnHeight + trickyOffset;
+}
+
+void WidgetWithButton::moveNull(int btnX, int btnY, int* res)
+{
+    res[0] = btnX;
+    res[1] = btnY;
+}
+
 void WidgetWithButton::moveToDir(int btnX, int btnY, direction finalDir, int* res)
 {
-    int resX;
-    int resY;
     switch (finalDir) {
     case LEFT:
-        resX = btnX - btnWidth - trickyOffset;
-        resY = btnY;
+        moveLeft(btnX, btnY, res);
         break;
     case RIGHT:
-        resX = btnX + btnWidth + trickyOffset;;
-        resY = btnY;
+        moveRight(btnX, btnY, res);
         break;
     case UP:
-        resX = btnX;
-        resY = btnY - btnHeight - trickyOffset;;
+        moveUp(btnX, btnY, res);
         break;
     case DOWN:
-        resX = btnX;
-        resY = btnY + btnHeight + trickyOffset;;
+        moveDown(btnX, btnY, res);
         break;
     case TOPLEFT:
-        resX = btnX - btnWidth;
-        resY = btnY - btnHeight - trickyOffset;;
+        moveLeft(btnX, btnY, res);
         break;
     case TOPRIGHT:
-        resX = btnX + btnWidth;
-        resY = btnY - btnHeight - trickyOffset;;
+        moveTopRight(btnX, btnY, res);
         break;
     case BOTTOMLEFT:
-        resX = btnX - btnWidth;
-        resY = btnY + btnHeight + trickyOffset;;
+        moveBottomLeft(btnX, btnY, res);
         break;
     case BOTTOMRIGHT:
-        resX = btnX + btnWidth;
-        resY = btnY + btnHeight + trickyOffset;;
+        moveBottomRight(btnX, btnY, res);
         break;
     default:
-        resX = btnX;
-        resY = btnY;
+        moveNull(btnX, btnY, res);
         break;
     }
-    res[0] = resX;
-    res[1] = resY;
 }
 
 void WidgetWithButton::chooseDirSimple(int rx, int ry, int btnX, int btnY, direction* resDirect)
@@ -202,6 +239,11 @@ void WidgetWithButton::moveAway()
     int btnX = ui->pushButton->x();
     int btnY = ui->pushButton->y();
 
+    widgetHeight = this->size().height();
+    widgetWidth = this->size().width();
+    widgetX = this->mapFromGlobal(this->pos()).x();
+    widgetY = this->mapFromGlobal(this->pos()).y();
+
     int rx = x - btnX;
     int ry = y - btnY;
 
@@ -212,16 +254,17 @@ void WidgetWithButton::moveAway()
     chooseDirSimple(rx, ry, btnX, btnY, resDirect);
     xDir = resDirect[0];
     yDir = resDirect[1];
-    delete(resDirect);
 
     direction* finalDir = new direction;
     chooseDestination(xDir, yDir, btnX, btnY, finalDir);
 
     int* res = new int[2];
     moveToDir(btnX, btnY, *finalDir, res);
-    delete(finalDir);
     ui->pushButton->move(res[0], res[1]);
+
+    delete(resDirect);
     delete(res);
+    delete(finalDir);
 }
 
 bool WidgetWithButton::eventFilter(QObject *obj, QEvent *event)
