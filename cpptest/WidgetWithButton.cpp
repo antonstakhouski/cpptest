@@ -17,6 +17,10 @@ WidgetWithButton::WidgetWithButton(QWidget *parent) :
     btnHeight = ui->pushButton->height();
     btnWidth = ui->pushButton->width();
     trickyOffset = 10;
+    widgetHeight = this->size().height();
+    widgetWidth = this->size().width();
+    widgetX = this->mapFromGlobal(this->pos()).x();
+    widgetY = this->mapFromGlobal(this->pos()).y();
 
     connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(btnClicked()));
 }
@@ -77,37 +81,10 @@ void WidgetWithButton::moveToDir(int btnX, int btnY, direction finalDir, int* re
     res[1] = resY;
 }
 
-void WidgetWithButton::moveAway()
+void WidgetWithButton::chooseDirSimple(int rx, int ry, int btnX, int btnY, direction* resDirect)
 {
-    QPoint p = this->mapFromGlobal(QCursor::pos());
-
-    int x = p.x();
-    int y = p.y();
-
-
-    int widgetX = this->x();
-    int widgetY = this->y();
-
-    widgetX = this->mapFromGlobal(this->pos()).x();
-    widgetY = this->mapFromGlobal(this->pos()).y();
-
-    int btnX = ui->pushButton->x();
-    int btnY = ui->pushButton->y();
-
-    int widgetHeight = this->size().height();
-    int widgetWidth = this->size().width();
-
-    int rx = x - btnX;
-    int ry = y - btnY;
-
-    //    cout << widgetX << endl;
-    //    cout << widgetY << endl;
-
-    direction xDir = STAY;
-    direction yDir = STAY;
-    direction finalDir = STAY;
-
-
+    direction xDir;
+    direction yDir;
     if (rx <= btnWidth / 2){
         if (btnX + 2 * btnWidth + trickyOffset >= widgetWidth) {
             xDir = STAY;
@@ -135,6 +112,31 @@ void WidgetWithButton::moveAway()
             yDir = UP;
         }
     }
+    resDirect[0] = xDir;
+    resDirect[1] = yDir;
+}
+
+void WidgetWithButton::moveAway()
+{
+    QPoint p = this->mapFromGlobal(QCursor::pos());
+
+    int x = p.x();
+    int y = p.y();
+
+    int btnX = ui->pushButton->x();
+    int btnY = ui->pushButton->y();
+
+    int rx = x - btnX;
+    int ry = y - btnY;
+
+    direction xDir = STAY;
+    direction yDir = STAY;
+    direction finalDir = STAY;
+
+    direction* resDirect = new direction[2];
+    chooseDirSimple(rx, ry, btnX, btnY, resDirect);
+    xDir = resDirect[0];
+    yDir = resDirect[1];
 
     finalDir = STAY;
     if (xDir == LEFT && yDir == STAY )

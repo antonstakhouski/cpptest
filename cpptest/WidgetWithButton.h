@@ -29,11 +29,18 @@ Q_SIGNALS:
 
 private:
     Ui::WidgetWithButton *ui;
+
     enum direction { STAY, LEFT, RIGHT, UP, DOWN, BOTTOMLEFT, BOTTOMRIGHT, TOPLEFT, TOPRIGHT};
     int btnWidth;
     int btnHeight;
     int trickyOffset;
+    int widgetHeight;
+    int widgetWidth;
+    int widgetX;
+    int widgetY;
+
     void moveToDir(int btnX, int btnY, direction finalDir, int* res);
+    void chooseDirSimple(int rx, int ry, int btnX, int btnY, direction *resDirect);
 };
 
 #endif // WIDGETWITHBUTTON_H
