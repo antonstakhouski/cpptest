@@ -1,5 +1,6 @@
 #include "WidgetWithButton.h"
 #include "ui_WidgetWithButton.h"
+#include "movewidget.h"
 
 #include <iostream>
 
@@ -31,89 +32,44 @@ void WidgetWithButton::btnClicked()
     cout << "You WIN!" << endl;
 }
 
-void WidgetWithButton::moveLeft(int btnX, int btnY, int* res)
-{
-    res[0] = btnX - btnWidth - trickyOffset;
-    res[1] = btnY;
-}
-
-void WidgetWithButton::moveRight(int btnX, int btnY, int* res)
-{
-    res[0] = btnX + btnWidth + trickyOffset;
-    res[1] = btnY;
-}
-
-void WidgetWithButton::moveUp(int btnX, int btnY, int* res)
-{
-    res[0] = btnX;
-    res[1] = btnY - btnHeight - trickyOffset;
-}
-
-void WidgetWithButton::moveDown(int btnX, int btnY, int* res)
-{
-    res[0] = btnX;
-    res[1] = btnY + btnHeight + trickyOffset;
-}
-
-void WidgetWithButton::moveTopLeft(int btnX, int btnY, int* res)
-{
-    res[0] = btnX - btnWidth - trickyOffset;
-    res[1] = btnY - btnHeight - trickyOffset;
-}
-
-void WidgetWithButton::moveTopRight(int btnX, int btnY, int* res)
-{
-    res[0] = btnX + btnWidth + trickyOffset;
-    res[1] = btnY - btnHeight - trickyOffset;
-}
-
-void WidgetWithButton::moveBottomLeft(int btnX, int btnY, int* res)
-{
-    res[0] = btnX - btnWidth - trickyOffset;
-    res[1] = btnY + btnHeight + trickyOffset;
-}
-
-void WidgetWithButton::moveBottomRight(int btnX, int btnY, int* res)
-{
-    res[0] = btnX + btnWidth + trickyOffset;
-    res[1] = btnY + btnHeight + trickyOffset;
-}
-
-void WidgetWithButton::moveNull(int btnX, int btnY, int* res)
-{
-    res[0] = btnX;
-    res[1] = btnY;
-}
-
 void WidgetWithButton::moveToDir(int btnX, int btnY, direction finalDir, int* res)
 {
+    MoveLeft moveLeft = MoveLeft(btnWidth, btnHeight, trickyOffset);
+    MoveRight moveRight(btnWidth, btnHeight, trickyOffset);
+    MoveUp moveUp(btnWidth, btnHeight, trickyOffset);
+    MoveDown moveDown(btnWidth, btnHeight, trickyOffset);
+    MoveTopLeft moveTopLeft(btnWidth, btnHeight, trickyOffset);
+    MoveTopRight moveTopRight(btnWidth, btnHeight, trickyOffset);
+    MoveBottomLeft moveBottomLeft(btnWidth, btnHeight, trickyOffset);
+    MoveBottomRight moveBottomRight(btnWidth, btnHeight, trickyOffset);
+    MoveNull moveNull(btnWidth, btnHeight, trickyOffset);
     switch (finalDir) {
     case LEFT:
-        moveLeft(btnX, btnY, res);
+        moveLeft.move(btnX, btnY, res);
         break;
     case RIGHT:
-        moveRight(btnX, btnY, res);
+        moveRight.move(btnX, btnY, res);
         break;
     case UP:
-        moveUp(btnX, btnY, res);
+        moveUp.move(btnX, btnY, res);
         break;
     case DOWN:
-        moveDown(btnX, btnY, res);
+        moveDown.move(btnX, btnY, res);
         break;
     case TOPLEFT:
-        moveLeft(btnX, btnY, res);
+        moveTopLeft.move(btnX, btnY, res);
         break;
     case TOPRIGHT:
-        moveTopRight(btnX, btnY, res);
+        moveTopRight.move(btnX, btnY, res);
         break;
     case BOTTOMLEFT:
-        moveBottomLeft(btnX, btnY, res);
+        moveBottomLeft.move(btnX, btnY, res);
         break;
     case BOTTOMRIGHT:
-        moveBottomRight(btnX, btnY, res);
+        moveBottomRight.move(btnX, btnY, res);
         break;
     default:
-        moveNull(btnX, btnY, res);
+        moveNull.move(btnX, btnY, res);
         break;
     }
 }
