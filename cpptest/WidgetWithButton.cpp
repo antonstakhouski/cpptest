@@ -6,10 +6,11 @@
 using namespace std;
 
 WidgetWithButton::WidgetWithButton(QWidget *parent) :
-    QWidget(parent),
-    ui(new Ui::WidgetWithButton)
+        QWidget(parent),
+        ui(new Ui::WidgetWithButton)
 {
     setMouseTracking(true);
+    //    setFixedSize(size());
     ui->setupUi(this);
     ui->pushButton->installEventFilter(this);
     connect(ui->pushButton, SIGNAL(clicked(bool)), this, SLOT(btnClicked()));
@@ -50,8 +51,8 @@ void WidgetWithButton::moveAway()
     int rx = x - btnX;
     int ry = y - btnY;
 
-//    cout << widgetX << endl;
-//    cout << widgetY << endl;
+    //    cout << widgetX << endl;
+    //    cout << widgetY << endl;
 
     int resX;
     int resY;
@@ -62,14 +63,16 @@ void WidgetWithButton::moveAway()
     direction yDir = STAY;
     direction finalDir = STAY;
 
+    int trickyOffset = 10;
+
     if (rx <= btnWidth / 2){
-        if (btnX + 2 * btnWidth >= widgetWidth) {
+        if (btnX + 2 * btnWidth + trickyOffset >= widgetWidth) {
             xDir = STAY;
         } else {
             xDir = RIGHT;
         }
     } else {
-        if (btnX - btnWidth <= widgetX) {
+        if (btnX - btnWidth  - trickyOffset <= widgetX) {
             xDir = STAY;
         } else {
             xDir = LEFT;
@@ -77,19 +80,20 @@ void WidgetWithButton::moveAway()
     }
 
     if(ry <= btnHeight / 2) {
-        if (btnY + 2 * btnHeight >= widgetHeight){
+        if (btnY + 2 * btnHeight  + trickyOffset >= widgetHeight){
             yDir = STAY;
         } else {
             yDir = DOWN;
         }
     } else {
-        if (btnY - btnHeight <= widgetY) {
+        if (btnY - btnHeight  - trickyOffset <= widgetY) {
             yDir = STAY;
         } else {
             yDir = UP;
         }
     }
 
+    finalDir = STAY;
     if (xDir == LEFT && yDir == STAY )
         finalDir = LEFT;
     if (xDir == RIGHT && yDir == STAY )
@@ -107,49 +111,92 @@ void WidgetWithButton::moveAway()
         finalDir = BOTTOMLEFT;
     if (xDir == RIGHT && yDir == DOWN)
         finalDir = BOTTOMRIGHT;
+
     if (xDir == STAY && yDir == STAY) {
-        if (btnX > widgetWidth / 2 && btnY < widgetHeight / 2)
-            finalDir = DOWN;
-        if (btnX > widgetWidth / 2 && btnY > widgetHeight / 2)
-            finalDir = LEFT;
-        if (btnX < widgetWidth / 2 && btnY > widgetHeight / 2)
-            finalDir = UP;
-        if (btnX < widgetWidth / 2 && btnY < widgetHeight / 2)
-            finalDir = RIGHT;
+        if (btnX > widgetWidth / 2 && btnY < widgetHeight / 2) {
+            if (btnY + 2 * btnHeight + trickyOffset < widgetHeight) {
+                finalDir = DOWN;
+            } else {
+                if (btnX - btnWidth - trickyOffset > widgetX) {
+                    finalDir = LEFT;
+                }
+            }
+        } else {
+
+            if (btnX > widgetWidth / 2 && btnY > widgetHeight / 2) {
+                if (btnX - btnWidth - trickyOffset > widgetX) {
+                    finalDir = LEFT;
+                } else {
+                    if (btnY - btnHeight - trickyOffset > widgetY) {
+                        finalDir = UP;
+                    } else {
+                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
+                            finalDir = RIGHT;
+                        }
+                    }
+                }
+            } else {
+
+                if (btnX < widgetWidth / 2 && btnY > widgetHeight / 2) {
+                    if (btnY - btnHeight - trickyOffset > widgetY) {
+                        finalDir = UP;
+                    } else {
+                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
+                            finalDir = RIGHT;
+                        }
+                    }
+                } else {
+
+                    if (btnX < widgetWidth / 2 && btnY < widgetHeight / 2) {
+                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
+                            finalDir = RIGHT;
+                        } else {
+                            if (btnY + 2 * btnHeight + trickyOffset < widgetHeight) {
+                                finalDir = DOWN;
+                            } else{
+                                if (btnY - btnHeight - trickyOffset > widgetY) {
+                                    finalDir = UP;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
 
     switch (finalDir) {
     case LEFT:
-        resX = btnX - btnWidth;
+        resX = btnX - btnWidth - trickyOffset;
         resY = btnY;
         break;
     case RIGHT:
-        resX = btnX + btnWidth;
+        resX = btnX + btnWidth + trickyOffset;;
         resY = btnY;
         break;
     case UP:
         resX = btnX;
-        resY = btnY - btnHeight;
+        resY = btnY - btnHeight - trickyOffset;;
         break;
     case DOWN:
         resX = btnX;
-        resY = btnY + btnHeight;
+        resY = btnY + btnHeight + trickyOffset;;
         break;
     case TOPLEFT:
         resX = btnX - btnWidth;
-        resY = btnY - btnHeight;
+        resY = btnY - btnHeight - trickyOffset;;
         break;
     case TOPRIGHT:
         resX = btnX + btnWidth;
-        resY = btnY - btnHeight;
+        resY = btnY - btnHeight - trickyOffset;;
         break;
     case BOTTOMLEFT:
         resX = btnX - btnWidth;
-        resY = btnY + btnHeight;
+        resY = btnY + btnHeight + trickyOffset;;
         break;
     case BOTTOMRIGHT:
         resX = btnX + btnWidth;
-        resY = btnY + btnHeight;
+        resY = btnY + btnHeight + trickyOffset;;
         break;
     default:
         resX = btnX;
