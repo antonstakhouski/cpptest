@@ -116,6 +116,82 @@ void WidgetWithButton::chooseDirSimple(int rx, int ry, int btnX, int btnY, direc
     resDirect[1] = yDir;
 }
 
+void WidgetWithButton::chooseDestination(direction xDir, direction yDir,
+                                         int btnX, int btnY, direction* finalDir)
+{
+    *finalDir = STAY;
+    if (xDir == LEFT && yDir == STAY )
+        *finalDir = LEFT;
+    if (xDir == RIGHT && yDir == STAY )
+        *finalDir = RIGHT;
+    if (xDir == STAY && yDir == UP)
+        *finalDir = UP ;
+    if (xDir == STAY && yDir == DOWN)
+        *finalDir = DOWN;
+
+    if (xDir == LEFT && yDir == UP)
+        *finalDir = TOPLEFT;
+    if (xDir == RIGHT && yDir == UP)
+        *finalDir = TOPRIGHT;
+    if (xDir == LEFT && yDir == DOWN)
+        *finalDir = BOTTOMLEFT;
+    if (xDir == RIGHT && yDir == DOWN)
+        *finalDir = BOTTOMRIGHT;
+
+    if (xDir == STAY && yDir == STAY) {
+        if (btnX > widgetWidth / 2 && btnY < widgetHeight / 2) {
+            if (btnY + 2 * btnHeight + trickyOffset < widgetHeight) {
+                *finalDir = DOWN;
+            } else {
+                if (btnX - btnWidth - trickyOffset > widgetX) {
+                    *finalDir = LEFT;
+                }
+            }
+        } else {
+
+            if (btnX > widgetWidth / 2 && btnY > widgetHeight / 2) {
+                if (btnX - btnWidth - trickyOffset > widgetX) {
+                    *finalDir = LEFT;
+                } else {
+                    if (btnY - btnHeight - trickyOffset > widgetY) {
+                        *finalDir = UP;
+                    } else {
+                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
+                            *finalDir = RIGHT;
+                        }
+                    }
+                }
+            } else {
+
+                if (btnX < widgetWidth / 2 && btnY > widgetHeight / 2) {
+                    if (btnY - btnHeight - trickyOffset > widgetY) {
+                        *finalDir = UP;
+                    } else {
+                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
+                            *finalDir = RIGHT;
+                        }
+                    }
+                } else {
+
+                    if (btnX < widgetWidth / 2 && btnY < widgetHeight / 2) {
+                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
+                            *finalDir = RIGHT;
+                        } else {
+                            if (btnY + 2 * btnHeight + trickyOffset < widgetHeight) {
+                                *finalDir = DOWN;
+                            } else{
+                                if (btnY - btnHeight - trickyOffset > widgetY) {
+                                    *finalDir = UP;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    }
+}
+
 void WidgetWithButton::moveAway()
 {
     QPoint p = this->mapFromGlobal(QCursor::pos());
@@ -131,87 +207,19 @@ void WidgetWithButton::moveAway()
 
     direction xDir = STAY;
     direction yDir = STAY;
-    direction finalDir = STAY;
 
     direction* resDirect = new direction[2];
     chooseDirSimple(rx, ry, btnX, btnY, resDirect);
     xDir = resDirect[0];
     yDir = resDirect[1];
+    delete(resDirect);
 
-    finalDir = STAY;
-    if (xDir == LEFT && yDir == STAY )
-        finalDir = LEFT;
-    if (xDir == RIGHT && yDir == STAY )
-        finalDir = RIGHT;
-    if (xDir == STAY && yDir == UP)
-        finalDir = UP ;
-    if (xDir == STAY && yDir == DOWN)
-        finalDir = DOWN;
-
-    if (xDir == LEFT && yDir == UP)
-        finalDir = TOPLEFT;
-    if (xDir == RIGHT && yDir == UP)
-        finalDir = TOPRIGHT;
-    if (xDir == LEFT && yDir == DOWN)
-        finalDir = BOTTOMLEFT;
-    if (xDir == RIGHT && yDir == DOWN)
-        finalDir = BOTTOMRIGHT;
-
-    if (xDir == STAY && yDir == STAY) {
-        if (btnX > widgetWidth / 2 && btnY < widgetHeight / 2) {
-            if (btnY + 2 * btnHeight + trickyOffset < widgetHeight) {
-                finalDir = DOWN;
-            } else {
-                if (btnX - btnWidth - trickyOffset > widgetX) {
-                    finalDir = LEFT;
-                }
-            }
-        } else {
-
-            if (btnX > widgetWidth / 2 && btnY > widgetHeight / 2) {
-                if (btnX - btnWidth - trickyOffset > widgetX) {
-                    finalDir = LEFT;
-                } else {
-                    if (btnY - btnHeight - trickyOffset > widgetY) {
-                        finalDir = UP;
-                    } else {
-                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
-                            finalDir = RIGHT;
-                        }
-                    }
-                }
-            } else {
-
-                if (btnX < widgetWidth / 2 && btnY > widgetHeight / 2) {
-                    if (btnY - btnHeight - trickyOffset > widgetY) {
-                        finalDir = UP;
-                    } else {
-                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
-                            finalDir = RIGHT;
-                        }
-                    }
-                } else {
-
-                    if (btnX < widgetWidth / 2 && btnY < widgetHeight / 2) {
-                        if (btnX + 2 * btnWidth + trickyOffset < widgetWidth) {
-                            finalDir = RIGHT;
-                        } else {
-                            if (btnY + 2 * btnHeight + trickyOffset < widgetHeight) {
-                                finalDir = DOWN;
-                            } else{
-                                if (btnY - btnHeight - trickyOffset > widgetY) {
-                                    finalDir = UP;
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-    }
+    direction* finalDir = new direction;
+    chooseDestination(xDir, yDir, btnX, btnY, finalDir);
 
     int* res = new int[2];
-    moveToDir(btnX, btnY, finalDir, res);
+    moveToDir(btnX, btnY, *finalDir, res);
+    delete(finalDir);
     ui->pushButton->move(res[0], res[1]);
     delete(res);
 }

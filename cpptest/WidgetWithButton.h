@@ -24,6 +24,7 @@ protected:
 
 public:
 
+
 Q_SIGNALS:
     void hovered();
 
@@ -41,6 +42,7 @@ private:
 
     void moveToDir(int btnX, int btnY, direction finalDir, int* res);
     void chooseDirSimple(int rx, int ry, int btnX, int btnY, direction *resDirect);
+    void chooseDestination(direction xDir, direction yDir, int btnX, int btnY, direction* finalDir);
 };
 
 #endif // WIDGETWITHBUTTON_H
