@@ -4,4 +4,7 @@
 !*.pro
 !*.ui
 build-*
+.*.swp
+*~
+.*.stash
 *.user

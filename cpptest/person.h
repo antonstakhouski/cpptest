@@ -3,26 +3,27 @@
 
 #include <string>
 
+#define id_size 8
+
 using namespace std;
 
 class Person
 {
 public:
     Person();
-    explicit Person(/*string _lastName, string _firstName, string _middleName,*/ string _id);
+    enum Sex {FEMALE = 0, MALE};
+    explicit Person(string _name, enum Sex _sex, int _age);
     Person(const Person& copy);
     ~Person();
 
-    virtual void addName() = 0;
-    virtual void addSex() = 0;
-    virtual void addAge() = 0;
+    virtual void setName(string _name) = 0;
     void show();
 
-private:
-    string firstName = 0;
-    string middleName = 0;
-    string lastName = 0;
-    string id;
+protected:
+    string name;
+    enum Sex sex;
+    unsigned short age;
+    char id[id_size + 1];
 
 };
 

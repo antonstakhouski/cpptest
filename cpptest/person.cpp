@@ -1,10 +1,12 @@
 #include "person.h"
 #include <iostream>
+#include <ctime>
+#include <cstring>
 
 Person::Person():
-//    firstName(""),
-//    middleName(""),
-//    lastName(""),
+    name(""),
+    sex(Sex(0)),
+    age(0),
     id("")
 {
 
@@ -12,26 +14,36 @@ Person::Person():
 
 Person::~Person()
 {
+
 }
 
-Person::Person(/* string _lastName, string _firstName, string _middleName, */string _id):
-//    firstName(_firstName),
-//    middleName(_middleName),
-//    lastName(_lastName),
-    id(_id) {}
+Person::Person(string _name, enum Sex _sex, int _age):
+    name(_name),
+    sex(_sex),
+    age(_age)
+{
+    srand(time(0));
+    id[id_size] = '\0';
+    for (int i = 0; i < id_size; i++)
+        id[i] = rand() % (128 - 33) + 32;
+}
 
 Person::Person(const Person &copy):
-//    firstName(copy.firstName),
-//    middleName(copy.middleName),
-//    lastName(copy.lastName),
-    id(copy.id)
+    name(copy.name),
+    sex(copy.sex),
+    age(copy.age)
 {
+    strcpy(id, copy.id);
 }
 
 void Person::show()
 {
-//    cout << "Id:" << id << endl;
-//    cout << "Last name: " << lastName << endl;
-//    cout << "First name: " << firstName << endl;
-//    cout << "Middle name: " << middleName << endl;
+   cout << "Id: " << id << endl;
+   cout << "Name: " << name << endl;
+   cout << "Sex: ";
+   if (sex == MALE)
+       cout << "MALE" << endl;
+   if (sex == FEMALE)
+       cout << "FEMALE" << endl;
+   cout << "Age: " << age << endl;
 }
