@@ -22,7 +22,7 @@ void moveUp(const QRect btnRect, QPoint* res, int trickyOffset)
 void moveDown(const QRect btnRect, QPoint* res, int trickyOffset)
 {
     res->setX(btnRect.x());
-    res->setY(btnRect.y() + btnRect.height());
+    res->setY(btnRect.y() + btnRect.height() + trickyOffset);
 }
 
 void moveTopRight(const QRect btnRect, QPoint* res, int trickyOffset)
