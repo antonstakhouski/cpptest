@@ -20,36 +20,27 @@ WidgetWithButton::~WidgetWithButton()
     delete ui;
 }
 
+void WidgetWithButton::moveAway(const QPoint &cursorPos)
+{
+    QRect widgetRect = QRect(pos(), size());
+
+    QRect btnRect = QRect(mapToGlobal(ui->pushButton->pos()), ui->pushButton->size());
+
+    QPoint res;
+    enterHandler.moveAway(cursorPos, widgetRect, btnRect, &res);
+
+//    qDebug()<< widgetRect << ui->pushButton-> << res ;
+    ui->pushButton->move(mapFromGlobal(res));
+}
+
 void WidgetWithButton::btnClicked()
 {
     cout << "You WIN!" << endl;
 }
 
-void WidgetWithButton::moveAway(QPoint cursorPos)
-{
-    QPoint res;
-    QRect widgetRect;
-    QRect btnRect;
-
-    widgetRect.setTopLeft(pos());
-    widgetRect.setHeight(height());
-    widgetRect.setWidth(width());
-
-    btnRect.setTopLeft(mapToGlobal(ui->pushButton->pos()));
-    btnRect.setHeight(ui->pushButton->height());
-    btnRect.setWidth(ui->pushButton->width());
-
-    enterHandler.moveAway(cursorPos,
-                          widgetRect,
-                          btnRect,
-                          &res
-                          );
-    ui->pushButton->move(res.x(), res.y());
-}
-
 bool WidgetWithButton::eventFilter(QObject *obj, QEvent *event)
 {
-    if (obj == (QObject*)ui->pushButton) {
+    if (obj == ui->pushButton) {
         if (event->type() == QEvent::Enter) {
             QEnterEvent *e = reinterpret_cast<QEnterEvent*>(event);
             moveAway(e->globalPos());

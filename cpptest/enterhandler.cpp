@@ -42,7 +42,7 @@ void EnterHandler::chooseDirSimple(direction *resDir2d)
 
     // test X axis
     if (rx <= btnRect.width() / 2){
-        if (btnRect.x() + 2 * btnRect.width() + trickyOffset >= widgetRect.width()) {
+        if (btnRect.x() + (2 * btnRect.width()) + trickyOffset >= widgetRect.width()) {
             resDir2d[0] = STAY;
         } else {
             resDir2d[0] = RIGHT;
