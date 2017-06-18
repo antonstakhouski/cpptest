@@ -25,26 +25,26 @@ void WidgetWithButton::btnClicked()
     cout << "You WIN!" << endl;
 }
 
-void WidgetWithButton::moveAway(QPoint pos)
+void WidgetWithButton::moveAway(QPoint cursorPos)
 {
-    QPoint globalMousePos = pos;
-    int x = globalMousePos.x();
-    int y = globalMousePos.y();
-    int* res = new int[2];//TODO: add delete
-    enterHandler.moveAway(x,
-                          y,
-                          ui->pushButton->x(),
-                          ui->pushButton->y(),
-                          ui->pushButton->width(),
-                          ui->pushButton->height(),
-                          this->mapFromGlobal(this->pos()).x(),
-                          this->mapFromGlobal(this->pos()).y(),
-                          this->size().width(),
-                          this->size().height(),
-                          res
-                          );
-    ui->pushButton->move(res[0], res[1]);
+    QPoint res;
+    QRect widgetRect;
+    QRect btnRect;
 
+    widgetRect.setTopLeft(pos());
+    widgetRect.setHeight(height());
+    widgetRect.setWidth(width());
+
+    btnRect.setTopLeft(mapToGlobal(ui->pushButton->pos()));
+    btnRect.setHeight(ui->pushButton->height());
+    btnRect.setWidth(ui->pushButton->width());
+
+    enterHandler.moveAway(cursorPos,
+                          widgetRect,
+                          btnRect,
+                          &res
+                          );
+    ui->pushButton->move(res.x(), res.y());
 }
 
 bool WidgetWithButton::eventFilter(QObject *obj, QEvent *event)

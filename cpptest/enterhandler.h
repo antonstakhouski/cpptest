@@ -1,40 +1,31 @@
 #ifndef ENTERHANDLER_H
 #define ENTERHANDLER_H
 
+#include <QPoint>
+#include <QRect>
+
+enum direction { STAY, LEFT, RIGHT, UP, DOWN, BOTTOMLEFT, BOTTOMRIGHT, TOPLEFT, TOPRIGHT};
+
 class EnterHandler
 {
 public:
     EnterHandler();
-    void moveAway(int x, int y, int _btnX, int _btnY, int _btnWidth, int _btnHeight,
-                  int _widgetX, int _widgetY, int _widgetWidth, int _widgetHeight, int *res);
+    void moveAway(const QPoint _cursorPos, const QRect _widgetRect, const QRect _btnRect, QPoint* res);
 
 private:
-    enum direction { STAY, LEFT, RIGHT, UP, DOWN, BOTTOMLEFT, BOTTOMRIGHT, TOPLEFT, TOPRIGHT};
     int trickyOffset;
-    int btnX;
-    int btnY;
-    int btnWidth;
-    int btnHeight;
-    int widgetX;
-    int widgetY;
-    int widgetWidth;
-    int widgetHeight;
+    QPoint cursorPos;
+    QRect btnRect;
+    QRect widgetRect;
 
-    void topRight(int btnY, direction* finalDir, int btnX);
-    void bottomRight(int btnY, direction* finalDir, int btnX);
-    void bottomLeft(direction* finalDir, int btnX, int btnY);
-    void topLeft(int btnX, int btnY, direction* finalDir);
+    void chooseDirSimple(direction* resDir2d);
+    void chooseDestination(const direction* resDir2d, direction *finalDir);
+    void moveToDir(const direction finalDir, QPoint* res);
 
-    void chooseDestination(direction xDir, direction yDir, int btnX, int btnY, direction *finalDir);
-    void chooseDirSimple(int rx, int ry, int btnX, int btnY, direction *resDirect);
-    void moveToDir(int btnX, int btnY, direction finalDir, int *res);
-
-    void moveOrtho(direction* finalDir, direction xDir, direction yDir);
-    void moveDiag(direction* finalDir, direction yDir, direction xDir);
-    void moveCorner(int btnX, direction xDir, int btnY, direction* finalDir, direction yDir);
-
-    void testXaxis(direction *xDir, int rx, int btnX);
-    void testYaxis(int ry, direction *yDir, int btnY);
+    void topRight(direction* finalDir);
+    void bottomRight(direction* finalDir);
+    void bottomLeft(direction* finalDir);
+    void topLeft(direction* finalDir);
 };
 
 #endif // ENTERHANDLER_H
