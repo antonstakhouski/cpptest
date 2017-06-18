@@ -63,7 +63,7 @@ void EnterHandler::chooseDirSimple(direction *resDir2d)
             resDir2d[1] = DOWN;
         }
     } else {
-        if (btnRect.y() - btnRect.height() - trickyOffset <= widgetRect.y()) {
+        if (btnRect.y() - 2 * btnRect.height() - trickyOffset <= widgetRect.y()) {
             resDir2d[1] = STAY;
         } else {
             resDir2d[1] = UP;
