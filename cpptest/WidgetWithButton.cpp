@@ -22,14 +22,13 @@ WidgetWithButton::~WidgetWithButton()
 
 void WidgetWithButton::moveAway(const QPoint &cursorPos)
 {
-    QRect widgetRect = QRect(pos(), size());
+    QRect widgetRect = rect();
 
-    QRect btnRect = QRect(mapToGlobal(ui->pushButton->pos()), ui->pushButton->size());
+    QRect btnRect = QRect(ui->pushButton->pos(), ui->pushButton->size());
 
     QPoint res;
-    enterHandler.moveAway(cursorPos, widgetRect, btnRect, &res);
+    enterHandler.moveAway(mapFromGlobal(cursorPos), widgetRect, btnRect, &res);
 
-//    qDebug()<< widgetRect << ui->pushButton-> << res ;
     ui->pushButton->move(mapFromGlobal(res));
 }
 

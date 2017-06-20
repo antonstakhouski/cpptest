@@ -4,11 +4,7 @@
 #include <QPoint>
 #include <QCursor>
 
-#include <iostream>
-
-using namespace std;
-
-EnterHandler::EnterHandler(): trickyOffset(10)
+EnterHandler::EnterHandler()
 {
 
 }
@@ -33,46 +29,25 @@ void EnterHandler::moveAway(const QPoint _cursorPos, const QRect _widgetRect, co
 
 void EnterHandler::chooseDirSimple(direction *resDir2d)
 {
-    int rx = cursorPos.x() - btnRect.x();
-    int ry = cursorPos.y() - btnRect.y();
-
-    cout << "rx:"  << endl;
-    cout << rx << endl;
-    cout << ry << endl << endl;
-
     // test X axis
-    if (rx <= btnRect.width() / 2){
-        if (btnRect.x() + (2 * btnRect.width()) + trickyOffset >= widgetRect.width()) {
-            resDir2d[0] = STAY;
-        } else {
-            resDir2d[0] = RIGHT;
-        }
-    } else {
-        if (btnRect.x() - btnRect.width() - trickyOffset <= widgetRect.x()) {
-            resDir2d[0] = STAY;
-        } else {
+    if (btnRect.x() + (3 * btnRect.width()) >= widgetRect.width()) {
+        if (!btnRect.x() - btnRect.width() >= widgetRect.x())
             resDir2d[0] = LEFT;
-        }
+        else
+            resDir2d[0] = STAY;
+    } else {
+        resDir2d[0] = RIGHT;
     }
 
     // test Y axis
-    if(ry <= btnRect.height() / 2) {
-        if (btnRect.y() + 2 * btnRect.height() + trickyOffset >= widgetRect.height()) {
-            resDir2d[1] = STAY;
-        } else {
-            resDir2d[1] = DOWN;
-        }
-    } else {
-        if (btnRect.y() - 2 * btnRect.height() - trickyOffset <= widgetRect.y()) {
-            resDir2d[1] = STAY;
-        } else {
+    if (btnRect.y() + (3 * btnRect.height()) >= widgetRect.height()) {
+        if (!btnRect.y() - btnRect.height() >= widgetRect.y())
             resDir2d[1] = UP;
-        }
+        else
+            resDir2d[1] = STAY;
+    } else {
+        resDir2d[1] = DOWN;
     }
-
-    cout << "res: " <<endl;
-    cout << resDir2d[0] << endl;
-    cout << resDir2d[1] << endl;
 }
 
 void EnterHandler::chooseDestination(const direction* resDir2d, direction* finalDir)
@@ -120,10 +95,10 @@ void EnterHandler::chooseDestination(const direction* resDir2d, direction* final
 
 void EnterHandler::topRight(direction* finalDir)
 {
-    if (btnRect.y() + 2 * btnRect.height() + trickyOffset < widgetRect.height()) {
+    if (btnRect.y() + (2 * btnRect.height()) < widgetRect.height()) {
         *finalDir = DOWN;
     } else {
-        if (btnRect.x() - btnRect.width() - trickyOffset > widgetRect.x()) {
+        if (btnRect.x() - btnRect.width() > widgetRect.x()) {
             *finalDir = LEFT;
         }
     }
@@ -131,13 +106,13 @@ void EnterHandler::topRight(direction* finalDir)
 
 void EnterHandler::bottomRight(direction* finalDir)
 {
-    if (btnRect.x() - btnRect.width() - trickyOffset > widgetRect.x()) {
+    if (btnRect.x() - btnRect.width() > widgetRect.x()) {
         *finalDir = LEFT;
     } else {
-        if (btnRect.y() - btnRect.height() - trickyOffset > widgetRect.y()) {
+        if (btnRect.y() - btnRect.height() > widgetRect.y()) {
             *finalDir = UP;
         } else {
-            if (btnRect.x() + 2 * btnRect.width() + trickyOffset < widgetRect.width()) {
+            if (btnRect.x() + 2 * btnRect.width() < widgetRect.width()) {
                 *finalDir = RIGHT;
             }
         }
@@ -146,10 +121,10 @@ void EnterHandler::bottomRight(direction* finalDir)
 
 void EnterHandler::bottomLeft(direction* finalDir)
 {
-    if (btnRect.y() - btnRect.height() - trickyOffset > widgetRect.y()) {
+    if (btnRect.y() - btnRect.height() > widgetRect.y()) {
         *finalDir = UP;
     } else {
-        if (btnRect.x() + 2 * btnRect.width() + trickyOffset < widgetRect.width()) {
+        if (btnRect.x() + 2 * btnRect.width() < widgetRect.width()) {
             *finalDir = RIGHT;
         }
     }
@@ -157,13 +132,13 @@ void EnterHandler::bottomLeft(direction* finalDir)
 
 void EnterHandler::topLeft(direction* finalDir)
 {
-    if (btnRect.x() + 2 * btnRect.width() + trickyOffset < widgetRect.width()) {
+    if (btnRect.x() + 2 * btnRect.width() < widgetRect.width()) {
         *finalDir = RIGHT;
     } else {
-        if (btnRect.y() + 2 * btnRect.height() + trickyOffset < widgetRect.height()) {
+        if (btnRect.y() + 2 * btnRect.height() < widgetRect.height()) {
             *finalDir = DOWN;
         } else{
-            if (btnRect.y() - btnRect.height() - trickyOffset > widgetRect.y()) {
+            if (btnRect.y() - btnRect.height() > widgetRect.y()) {
                 *finalDir = UP;
             }
         }
@@ -174,28 +149,28 @@ void EnterHandler::moveToDir(const direction finalDir, QPoint* res)
 {
     switch (finalDir) {
     case LEFT:
-        moveLeft(btnRect, res, trickyOffset);
+        moveLeft(btnRect, res);
         break;
     case RIGHT:
-        moveRight(btnRect, res, trickyOffset);
+        moveRight(btnRect, res);
         break;
     case UP:
-        moveUp(btnRect, res, trickyOffset);
+        moveUp(btnRect, res);
         break;
     case DOWN:
-        moveDown(btnRect, res, trickyOffset);
+        moveDown(btnRect, res);
         break;
     case TOPLEFT:
-        moveTopLeft(btnRect, res, trickyOffset);
+        moveTopLeft(btnRect, res);
         break;
     case TOPRIGHT:
-        moveTopRight(btnRect, res, trickyOffset);
+        moveTopRight(btnRect, res);
         break;
     case BOTTOMLEFT:
-        moveBottomLeft(btnRect, res, trickyOffset);
+        moveBottomLeft(btnRect, res);
         break;
     case BOTTOMRIGHT:
-        moveBottomRight(btnRect, res, trickyOffset);
+        moveBottomRight(btnRect, res);
         break;
     default:
         moveNull(btnRect, res);

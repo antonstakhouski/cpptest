@@ -13,7 +13,6 @@ public:
     void moveAway(const QPoint _cursorPos, const QRect _widgetRect, const QRect _btnRect, QPoint* res);
 
 private:
-    int trickyOffset;
     QPoint cursorPos;
     QRect btnRect;
     QRect widgetRect;
