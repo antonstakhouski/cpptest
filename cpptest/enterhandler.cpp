@@ -1,18 +1,13 @@
 #include "enterhandler.h"
 #include "movewidget.h"
 
-#include <QPoint>
-#include <QCursor>
-
 EnterHandler::EnterHandler()
 {
 
 }
 
-void EnterHandler::moveAway(const QPoint _cursorPos, const QRect _widgetRect,
-                            const QRect _btnRect, QPoint *res)
+void EnterHandler::moveAway(const QRect& _widgetRect, const QRect& _btnRect, QPoint *res)
 {
-    cursorPos = _cursorPos;
     btnRect = _btnRect;
     widgetRect = _widgetRect;
 
@@ -37,7 +32,7 @@ void EnterHandler::chooseDirSimple(direction *resDir2d)
         resDir2d[0] = RIGHT;
 
     // test Y axis
-    if (btnRect.y() - (4 * btnRect.height()) >= widgetRect.y())
+    if (btnRect.y() - (2 * btnRect.height()) >= widgetRect.y())
         resDir2d[1] = UP;
     else
         resDir2d[1] = DOWN;
@@ -58,7 +53,7 @@ void EnterHandler::chooseDestination(const direction* resDir2d, direction* final
         *finalDir = BOTTOMRIGHT;
 }
 
-void EnterHandler::moveToDir(const direction finalDir, QPoint* res)
+void EnterHandler::moveToDir(const direction& finalDir, QPoint* res)
 {
     switch (finalDir) {
     case TOPLEFT:

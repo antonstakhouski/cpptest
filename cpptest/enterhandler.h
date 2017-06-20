@@ -10,22 +10,15 @@ class EnterHandler
 {
 public:
     EnterHandler();
-    void moveAway(const QPoint _cursorPos, const QRect _widgetRect,
-                  const QRect _btnRect, QPoint* res);
+    void moveAway(const QRect& _widgetRect, const QRect& _btnRect, QPoint* res);
 
 private:
-    QPoint cursorPos;
     QRect btnRect;
     QRect widgetRect;
 
     void chooseDirSimple(direction* resDir2d);
     void chooseDestination(const direction* resDir2d, direction *finalDir);
-    void moveToDir(const direction finalDir, QPoint* res);
-
-    void topRight(direction* finalDir);
-    void bottomRight(direction* finalDir);
-    void bottomLeft(direction* finalDir);
-    void topLeft(direction* finalDir);
+    void moveToDir(const direction& finalDir, QPoint* res);
 };
 
 #endif // ENTERHANDLER_H

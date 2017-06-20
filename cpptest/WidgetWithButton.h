@@ -2,7 +2,6 @@
 #define WIDGETWITHBUTTON_H
 
 #include <QWidget>
-#include <QDebug>
 #include <QPushButton>
 #include <QEnterEvent>
 #include "enterhandler.h"
@@ -19,7 +18,7 @@ public:
     explicit WidgetWithButton(QWidget *parent = 0);
     ~WidgetWithButton();
 public slots:
-    void moveAway(const QPoint &cursorPos);
+    void moveAway();
     void btnClicked();
 
 protected:
