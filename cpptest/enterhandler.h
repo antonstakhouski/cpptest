@@ -10,7 +10,8 @@ class EnterHandler
 {
 public:
     EnterHandler();
-    void moveAway(const QPoint _cursorPos, const QRect _widgetRect, const QRect _btnRect, QPoint* res);
+    void moveAway(const QPoint _cursorPos, const QRect _widgetRect,
+                  const QRect _btnRect, QPoint* res);
 
 private:
     QPoint cursorPos;
