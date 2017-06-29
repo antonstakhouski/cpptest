@@ -18,7 +18,7 @@ public:
     explicit WidgetWithButton(QWidget *parent = 0);
     ~WidgetWithButton();
 public slots:
-    void moveAway(QPoint pos);
+    void moveAway();
     void btnClicked();
 
 protected:
