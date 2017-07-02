@@ -1,5 +1,12 @@
 #include "listwidget.h"
+
 #include <cstdio>
+#include <time.h>
+#include <array>
+
+#define N 100000
+
+using namespace std;
 
 ListWidget::ListWidget(QWidget* parent) :
     QWidget(parent)
@@ -56,7 +63,47 @@ void ListWidget::arrayClicked(QWidget* _list)
 {
     QListWidget* list = (QListWidget*)_list;
     list->clear();
+
+    containerTest();
     list->addItem("test");
-    puts("tst");
+}
+
+void ListWidget::containerTest()
+{
+    array<int, N> arr;
+
+    for(int i = 0; i < N; i++){
+        arr[i] = rand();
+        printf("%d\n", arr[i]);
+    }
+
+    int item;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        item = arr[i];
+        printf("%d\n", item);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+
+    printf("search time: %f\n", time_spent);
+}
+
+int ListWidget::searchTest()
+{
+
+    return 0;
+}
+
+int ListWidget::insertTest()
+{
+
+    return 0;
+}
+
+int ListWidget::deleteTest()
+{
+
+    return 0;
 }
 

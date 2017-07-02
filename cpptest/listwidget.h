@@ -8,6 +8,8 @@
 #include <QPushButton>
 #include <QSignalMapper>
 
+#include "testResults.h"
+
 class ListWidget : public QWidget
 {
     Q_OBJECT
@@ -24,9 +26,17 @@ class ListWidget : public QWidget
 
     QSignalMapper* signalMapper;
 
+    testResults results;
+
 public:
     explicit ListWidget(QWidget* parent = 0);
     ~ListWidget();
+
+    void containerTest();
+
+    int searchTest();
+    int insertTest();
+    int deleteTest();
 
 public slots:
     void arrayClicked(QWidget* list);
