@@ -1,8 +1,5 @@
-#include "studentcard.h"
-#include "driverlicence.h"
-#include "WidgetWithButton.h"
-
 #include <QApplication>
+#include "listwidget.h"
 
 using namespace std;
 
@@ -10,7 +7,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    WidgetWithButton b;
-    b.show();
+    ListWidget w;
+    w.show();
+
     return a.exec();
 }
