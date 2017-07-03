@@ -7,8 +7,11 @@
 #include <QListWidget>
 #include <QPushButton>
 #include <QSignalMapper>
+#include <QString>
 
 #include "testResults.h"
+
+#define CONTAINERS_NUM 16
 
 class ListWidget : public QWidget
 {
@@ -21,8 +24,12 @@ class ListWidget : public QWidget
     QVBoxLayout* leftBox;
     QVBoxLayout* rightBox;
 
-    QPushButton* arrayLeft;
-    QPushButton* arrayRight;
+    const QString labels[CONTAINERS_NUM] = {"Array", "Vector", "Deque",
+        "Forward List", "List",
+        "Stack", "Queue", "Priority queue", "Set", "Multiset", "Map", "Multimap",
+        "Unordered Set", "Unordered Multiset", "Unordered Map", "Unordered Multimap"};
+    QPushButton** leftButtons;
+    QPushButton** rightButtons;
 
     QSignalMapper* signalMapper;
 
@@ -39,7 +46,7 @@ public:
     int deleteTest();
 
 public slots:
-    void arrayClicked(QWidget* list);
+    void btnHandler(QWidget* list);
 };
 
 #endif // LISTWIDGET_H

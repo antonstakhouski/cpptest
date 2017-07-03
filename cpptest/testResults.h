@@ -1,7 +1,7 @@
 struct testResults{
-    int searchTest;
-    int insertTest;
-    int deleteTest;
+    double searchTest;
+    double insertTest;
+    double deleteTest;
 };
 
 typedef struct testResults testResults;
