@@ -1,8 +1,11 @@
 #include "listwidget.h"
 
+#include <iostream>
 #include <cstdio>
 #include <time.h>
+
 #include <array>
+#include <vector>
 
 #define N 100000
 
@@ -21,19 +24,22 @@ ListWidget::ListWidget(QWidget* parent) :
 
     leftButtons = new QPushButton*[CONTAINERS_NUM];
     rightButtons = new QPushButton*[CONTAINERS_NUM];
-
-    signalMapper = new QSignalMapper(this);
+    signalMapper = new QSignalMapper*[CONTAINERS_NUM];
     for(int i = 0; i < CONTAINERS_NUM; i++){
         leftButtons[i] = new QPushButton(labels[i]);
         rightButtons[i] = new QPushButton(labels[i]);
-        signalMapper->setMapping(leftButtons[i], (QWidget*)leftList);
-        signalMapper->setMapping(rightButtons[i], (QWidget*)rightList);
-        connect(leftButtons[i], SIGNAL(clicked()), signalMapper, SLOT(map()));
-        connect(rightButtons[i], SIGNAL(clicked()), signalMapper, SLOT(map()));
+        signalMapper[i] = new QSignalMapper(this);
+        signalMapper[i]->setMapping(leftButtons[i], (QWidget*)leftList);
+        signalMapper[i]->setMapping(rightButtons[i], (QWidget*)rightList);
+        connect(leftButtons[i], SIGNAL(clicked()), signalMapper[i], SLOT(map()));
+        connect(rightButtons[i], SIGNAL(clicked()), signalMapper[i], SLOT(map()));
         leftBox->addWidget(leftButtons[i]);
         rightBox->addWidget(rightButtons[i]);
     }
-    connect(signalMapper, SIGNAL(mapped(QWidget*)), this, SLOT(btnHandler(QWidget*)));
+    connect(signalMapper[0], SIGNAL(mapped(QWidget*)), this,
+            SLOT(arrayHandler(QWidget*)));
+    connect(signalMapper[1], SIGNAL(mapped(QWidget*)), this,
+            SLOT(vectorHandler(QWidget*)));
 
     windowLayout->addLayout(leftBox, 0, 0, 0);
     windowLayout->addWidget(leftList, 0, 1);
@@ -52,18 +58,19 @@ ListWidget::~ListWidget()
     delete leftBox;
     delete rightBox;
 
-    delete signalMapper;
     delete windowLayout;
 
     for(int i = 0; i < CONTAINERS_NUM; i++){
         delete leftButtons[i];
         delete rightButtons[i];
+        delete signalMapper[i];
     }
     delete[] leftButtons;
     delete[] rightButtons;
+    delete[] signalMapper;
 }
 
-void ListWidget::btnHandler(QWidget* _list)
+void ListWidget::arrayHandler(QWidget* _list)
 {
     QListWidget* list = (QListWidget*)_list;
     // list->clear();
@@ -72,48 +79,82 @@ void ListWidget::btnHandler(QWidget* _list)
     list->addItem("test");
 }
 
-void ListWidget::containerTest()
+void ListWidget::vectorHandler(QWidget* _list)
 {
-    array<int, N> arr;
+    QListWidget* list = (QListWidget*)_list;
+    list->clear();
 
+    vector<int> v;
     for(int i = 0; i < N; i++){
-        arr[i] = rand();
-        printf("%d\n", arr[i]);
+        v.push_back(rand());
     }
+    for(auto el : v)
+        cout << el << endl;
 
+    containerTest<>(v);
+
+    list->addItem("Search time: " + QString::number(results.searchTest));
+    list->addItem("Insert time: " + QString::number(results.insertTest));
+    list->addItem("Delete time: " + QString::number(results.deleteTest));
+}
+
+template<typename T>
+void ListWidget::containerTest(T& container)
+{
+    searchTest<>(container);
+    insertTest<>(container);
+
+    for(auto el : container)
+        cout << el << endl;
+
+    deleteTest<>(container);
+
+    for(auto el : container)
+        cout << el << endl;
+}
+
+template<typename T>
+void ListWidget::searchTest(const T& container)
+{
     int item;
+    size_t index;
     clock_t begin = clock();
     for(int i = 0; i < N; i++){
-        item = arr[i];
-        printf("%d\n", item);
+        index = rand() % N;
+        item = *(container.begin() + index);
+        cout << item << endl;
     }
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     results.searchTest = time_spent;
-
-    printf("search time: %f\n", time_spent);
-    //
-    // array<int, N> arr2;
-    // for(int i = 0; i < N; i++){
-    //     arr2[ i] = rand();
-    // }
 }
 
-int ListWidget::searchTest()
+template<typename T>
+void ListWidget::insertTest(T& container)
 {
-
-    return 0;
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % container.size();
+        container.insert(container.begin() + index, item);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.insertTest = time_spent;
 }
 
-int ListWidget::insertTest()
+template<typename T>
+void ListWidget::deleteTest(T& container)
 {
-
-    return 0;
-}
-
-int ListWidget::deleteTest()
-{
-
-    return 0;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % container.size();
+        container.erase(container.begin() + index);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.deleteTest = time_spent;
 }
 

@@ -31,7 +31,7 @@ class ListWidget : public QWidget
     QPushButton** leftButtons;
     QPushButton** rightButtons;
 
-    QSignalMapper* signalMapper;
+    QSignalMapper** signalMapper;
 
     testResults results;
 
@@ -39,14 +39,18 @@ public:
     explicit ListWidget(QWidget* parent = 0);
     ~ListWidget();
 
-    void containerTest();
+    template<typename T> void containerTest(T& container);
 
-    int searchTest();
-    int insertTest();
-    int deleteTest();
+    template<typename T> void searchTest(const T& container);
+    template<typename T> void insertTest(T& container);
+    template<typename T> void deleteTest(T& container);
 
 public slots:
-    void btnHandler(QWidget* list);
+    void arrayHandler(QWidget* list);
+    void vectorHandler(QWidget* list);
+    // void dequeHandler(QWidget* list);
+    // void forwardListHandler(QWidget* list);
+    // void listHandler(QWidget* list);
 };
 
 #endif // LISTWIDGET_H
