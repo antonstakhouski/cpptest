@@ -89,39 +89,14 @@ public:
 
     void searchTest(const priority_queue<int>& container);
     void insertTest(priority_queue<int>& container);
-    void deleteTest(priority_queue<int>& container);
+    template<typename T> void queue_deleteTest(T& container);
 
-    void searchTest(const set<int>& container);
-    void insertTest(set<int>& container);
-    void deleteTest(set<int>& container);
+    template<typename T> void set_searchTest(const T& container);
+    template<typename T> void set_insertTest(T& container);
 
-    void searchTest(const multiset<int>& container);
-    void insertTest(multiset<int>& container);
-    void deleteTest(multiset<int>& container);
-
-    void searchTest(const map<int, int>& container);
-    void insertTest(map<int, int>& container);
-    void deleteTest(map<int, int>& container);
-
-    void searchTest(const multimap<int, int>& container);
-    void insertTest(multimap<int, int>& container);
-    void deleteTest(multimap<int, int>& container);
-
-    void searchTest(const unordered_set<int>& container);
-    void insertTest(unordered_set<int>& container);
-    void deleteTest(unordered_set<int>& container);
-
-    void searchTest(const unordered_multiset<int>& container);
-    void insertTest(unordered_multiset<int>& container);
-    void deleteTest(unordered_multiset<int>& container);
-
-    void searchTest(const unordered_map<int, int>& container);
-    void insertTest(unordered_map<int, int>& container);
-    void deleteTest(unordered_map<int, int>& container);
-
-    void searchTest(const unordered_multimap<int, int>& container);
-    void insertTest(unordered_multimap<int, int>& container);
-    void deleteTest(unordered_multimap<int, int>& container);
+    template<typename T> void map_searchTest(const T& container);
+    template<typename T> void map_insertTest(T& container);
+    template<typename T> void map_deleteTest(T& container);
 
 public slots:
     void arrayHandler(QWidget* list);
