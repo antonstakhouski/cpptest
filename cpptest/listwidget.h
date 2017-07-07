@@ -61,7 +61,7 @@ public:
 
     void searchTest(const vector<int>& container);
     void insertTest(vector<int>& container);
-    void deleteTest(vector<int>& container);
+    template<typename T> void vec_deleteTest(T& container);
 
     void searchTest(const array<int, N>& container);
     void insertTest(array<int, N>& container);
@@ -69,7 +69,6 @@ public:
 
     void searchTest(const deque<int>& container);
     void insertTest(deque<int>& container);
-    void deleteTest(deque<int>& container);
 
     void searchTest(const forward_list<int>& container);
     void insertTest(forward_list<int>& container);
@@ -80,15 +79,13 @@ public:
     void deleteTest(list<int>& container);
 
     void searchTest(const stack<int>& container);
-    void insertTest(stack<int>& container);
+    template<typename T> void stack_insertTest(T& container);
     void deleteTest(stack<int>& container);
 
     void searchTest(const queue<int>& container);
-    void insertTest(queue<int>& container);
     void deleteTest(queue<int>& container);
 
     void searchTest(const priority_queue<int>& container);
-    void insertTest(priority_queue<int>& container);
     template<typename T> void queue_deleteTest(T& container);
 
     template<typename T> void set_searchTest(const T& container);

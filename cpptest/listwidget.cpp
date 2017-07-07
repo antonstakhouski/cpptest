@@ -117,7 +117,10 @@ void ListWidget::vectorHandler(QWidget* _list)
         v.push_back(rand());
     }
 
-    containerTest(v);
+    searchTest(v);
+    insertTest(v);
+    vec_deleteTest(v);
+
     printRes(list);
 }
 
@@ -267,7 +270,10 @@ void ListWidget::dequeHandler(QWidget* _list)
         d.push_back(rand());
     }
 
-    containerTest(d);
+    searchTest(d);
+    insertTest(d);
+    vec_deleteTest(d);
+
     printRes(list);
 }
 
@@ -317,7 +323,7 @@ void ListWidget::stackHandler(QWidget* _list)
     }
 
     searchTest(l);
-    insertTest(l);
+    stack_insertTest(l);
     queue_deleteTest(l);
 
     printRes(lst);
@@ -334,7 +340,7 @@ void ListWidget::queueHandler(QWidget* _list)
     }
 
     searchTest(q);
-    insertTest(q);
+    stack_insertTest(q);
     queue_deleteTest(q);
 
     printRes(lst);
@@ -351,7 +357,7 @@ void ListWidget::priority_queueHandler(QWidget* _list)
     }
 
     searchTest(q);
-    insertTest(q);
+    stack_insertTest(q);
     queue_deleteTest(q);
 
     printRes(lst);
@@ -395,7 +401,8 @@ void ListWidget::insertTest(vector<int>& container)
     results.insertTest = time_spent;
 }
 
-void ListWidget::deleteTest(vector<int>& container)
+template<typename T>
+void ListWidget::vec_deleteTest(T& container)
 {
     size_t index;
     clock_t begin = clock();
@@ -461,19 +468,6 @@ void ListWidget::insertTest(deque<int>& container)
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     results.insertTest = time_spent;
-}
-
-void ListWidget::deleteTest(deque<int>& container)
-{
-    size_t index;
-    clock_t begin = clock();
-    for(int i = 0; i < N; i++){
-        index = rand() % container.size();
-        container.erase(container.begin() + index);
-    }
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    results.deleteTest = time_spent;
 }
 
 void ListWidget::searchTest(const forward_list<int>& container)
@@ -567,25 +561,13 @@ void ListWidget::searchTest(const stack<int>& container)
     results.searchTest = -1;
 }
 
-void ListWidget::insertTest(stack<int>& container)
-{
-    int item;
-    clock_t begin = clock();
-    for(int i = 0; i < N; i++){
-        item = rand();
-        container.push(item);
-    }
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    results.insertTest = time_spent;
-}
-
 void ListWidget::searchTest(const queue<int>& container)
 {
     results.searchTest = -1;
 }
 
-void ListWidget::insertTest(queue<int>& container)
+template<typename T>
+void ListWidget::stack_insertTest(T& container)
 {
     int item;
     clock_t begin = clock();
@@ -613,19 +595,6 @@ void ListWidget::queue_deleteTest(T& container)
 void ListWidget::searchTest(const priority_queue<int>& container)
 {
     results.searchTest = -1;
-}
-
-void ListWidget::insertTest(priority_queue<int>& container)
-{
-    int item;
-    clock_t begin = clock();
-    for(int i = 0; i < N; i++){
-        item = rand();
-        container.push(item);
-    }
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    results.insertTest = time_spent;
 }
 
 template<typename T>
