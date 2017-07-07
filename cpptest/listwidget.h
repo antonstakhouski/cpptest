@@ -18,6 +18,8 @@
 #include <queue>
 #include <set>
 #include <map>
+#include <unordered_set>
+#include <unordered_map>
 
 #include "testResults.h"
 
@@ -105,6 +107,22 @@ public:
     void insertTest(multimap<int, int>& container);
     void deleteTest(multimap<int, int>& container);
 
+    void searchTest(const unordered_set<int>& container);
+    void insertTest(unordered_set<int>& container);
+    void deleteTest(unordered_set<int>& container);
+
+    void searchTest(const unordered_multiset<int>& container);
+    void insertTest(unordered_multiset<int>& container);
+    void deleteTest(unordered_multiset<int>& container);
+
+    void searchTest(const unordered_map<int, int>& container);
+    void insertTest(unordered_map<int, int>& container);
+    void deleteTest(unordered_map<int, int>& container);
+
+    void searchTest(const unordered_multimap<int, int>& container);
+    void insertTest(unordered_multimap<int, int>& container);
+    void deleteTest(unordered_multimap<int, int>& container);
+
 public slots:
     void arrayHandler(QWidget* list);
     void vectorHandler(QWidget* list);
@@ -118,6 +136,10 @@ public slots:
     void multisetHandler(QWidget* list);
     void mapHandler(QWidget* list);
     void multimapHandler(QWidget* list);
+    void unordered_setHandler(QWidget* list);
+    void unordered_multisetHandler(QWidget* list);
+    void unordered_mapHandler(QWidget* list);
+    void unordered_multimapHandler(QWidget* list);
 };
 
 #endif // LISTWIDGET_H

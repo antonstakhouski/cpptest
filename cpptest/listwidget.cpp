@@ -55,14 +55,14 @@ ListWidget::ListWidget(QWidget* parent) :
             SLOT(mapHandler(QWidget*)));
     connect(signalMapper[11], SIGNAL(mapped(QWidget*)), this,
             SLOT(multimapHandler(QWidget*)));
-    // connect(signalMapper[12], SIGNAL(mapped(QWidget*)), this,
-    //         SLOT(dequeHandler(QWidget*)));
-    // connect(signalMapper[13], SIGNAL(mapped(QWidget*)), this,
-    //         SLOT(dequeHandler(QWidget*)));
-    // connect(signalMapper[14], SIGNAL(mapped(QWidget*)), this,
-    //         SLOT(dequeHandler(QWidget*)));
-    // connect(signalMapper[15], SIGNAL(mapped(QWidget*)), this,
-    //         SLOT(dequeHandler(QWidget*)));
+    connect(signalMapper[12], SIGNAL(mapped(QWidget*)), this,
+            SLOT(unordered_setHandler(QWidget*)));
+    connect(signalMapper[13], SIGNAL(mapped(QWidget*)), this,
+            SLOT(unordered_multisetHandler(QWidget*)));
+    connect(signalMapper[14], SIGNAL(mapped(QWidget*)), this,
+            SLOT(unordered_mapHandler(QWidget*)));
+    connect(signalMapper[15], SIGNAL(mapped(QWidget*)), this,
+            SLOT(unordered_multimapHandler(QWidget*)));
 
     windowLayout->addLayout(leftBox, 0, 0, 0);
     windowLayout->addWidget(leftList, 0, 1);
@@ -149,6 +149,34 @@ void ListWidget::multimapHandler(QWidget* _list)
     printRes(list);
 }
 
+void ListWidget::unordered_mapHandler(QWidget* _list)
+{
+    QListWidget* list = (QListWidget*)_list;
+    list->clear();
+
+    unordered_map<int, int> m;
+    for(int i = 0; i < N; i++){
+        m.emplace(rand(), rand());
+    }
+
+    containerTest(m);
+    printRes(list);
+}
+
+void ListWidget::unordered_multimapHandler(QWidget* _list)
+{
+    QListWidget* list = (QListWidget*)_list;
+    list->clear();
+
+    unordered_multimap<int, int> m;
+    for(int i = 0; i < N; i++){
+        m.emplace(rand(), rand());
+    }
+
+    containerTest(m);
+    printRes(list);
+}
+
 void ListWidget::setHandler(QWidget* _list)
 {
     QListWidget* list = (QListWidget*)_list;
@@ -169,6 +197,34 @@ void ListWidget::multisetHandler(QWidget* _list)
     list->clear();
 
     multiset<int> s;
+    for(int i = 0; i < N; i++){
+        s.insert(rand());
+    }
+
+    containerTest(s);
+    printRes(list);
+}
+
+void ListWidget::unordered_setHandler(QWidget* _list)
+{
+    QListWidget* list = (QListWidget*)_list;
+    list->clear();
+
+    unordered_set<int> s;
+    for(int i = 0; i < N; i++){
+        s.insert(rand());
+    }
+
+    containerTest(s);
+    printRes(list);
+}
+
+void ListWidget::unordered_multisetHandler(QWidget* _list)
+{
+    QListWidget* list = (QListWidget*)_list;
+    list->clear();
+
+    unordered_multiset<int> s;
     for(int i = 0; i < N; i++){
         s.insert(rand());
     }
@@ -720,6 +776,186 @@ void ListWidget::insertTest(multimap<int, int>& container)
 }
 
 void ListWidget::deleteTest(multimap<int, int>& container)
+{
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % container.size();
+        container.erase(index);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.deleteTest = time_spent;
+}
+
+void ListWidget::searchTest(const unordered_set<int>& container)
+{
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % N;
+        if(container.count(index)){
+            item = *(container.find(index));
+            cout << item << endl;
+        }
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.searchTest = time_spent;
+}
+
+void ListWidget::insertTest(unordered_set<int>& container)
+{
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        item = rand();
+        index = rand() % container.size();
+        container.insert(item);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.insertTest = time_spent;
+}
+
+void ListWidget::deleteTest(unordered_set<int>& container)
+{
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % container.size();
+        container.erase(index);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.deleteTest = time_spent;
+}
+
+void ListWidget::searchTest(const unordered_multiset<int>& container)
+{
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % N;
+        if(container.count(index)){
+            item = *(container.find(index));
+            cout << item << endl;
+        }
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.searchTest = time_spent;
+}
+
+void ListWidget::insertTest(unordered_multiset<int>& container)
+{
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        item = rand();
+        index = rand() % container.size();
+        container.insert(item);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.insertTest = time_spent;
+}
+
+void ListWidget::deleteTest(unordered_multiset<int>& container)
+{
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % container.size();
+        container.erase(index);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.deleteTest = time_spent;
+}
+
+void ListWidget::searchTest(const unordered_map<int, int>& container)
+{
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % N;
+        if(container.count(index) > 0){
+            item = container.find(index)->second;
+            cout << item << endl;
+        }
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.searchTest = time_spent;
+}
+
+void ListWidget::insertTest(unordered_map<int, int>& container)
+{
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        item = rand();
+        index = rand() % container.size();
+        container.emplace(item, item);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.insertTest = time_spent;
+}
+
+void ListWidget::deleteTest(unordered_map<int, int>& container)
+{
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % container.size();
+        container.erase(index);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.deleteTest = time_spent;
+}
+
+void ListWidget::searchTest(const unordered_multimap<int, int>& container)
+{
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        index = rand() % N;
+        if(container.count(index) > 0){
+            item = container.find(index)->second;
+            cout << item << endl;
+        }
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.searchTest = time_spent;
+}
+
+void ListWidget::insertTest(unordered_multimap<int, int>& container)
+{
+    int item;
+    size_t index;
+    clock_t begin = clock();
+    for(int i = 0; i < N; i++){
+        item = rand();
+        index = rand() % container.size();
+        container.emplace(item, item);
+    }
+    clock_t end = clock();
+    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
+    results.insertTest = time_spent;
+}
+
+void ListWidget::deleteTest(unordered_multimap<int, int>& container)
 {
     size_t index;
     clock_t begin = clock();
