@@ -59,22 +59,17 @@ public:
     template<typename T> void vec_deleteTest(T& container);
 
     template<typename T> void arr_searchTest(const T& container);
-    void insertTest(array<int, N>& container);
-    void deleteTest(array<int, N>& container);
+
+    void searchTest();
+    void insertTest();
+    void deleteTest();
 
     template<typename T> void list_searchTest(const T& container);
     template<typename T> void list_insertTest(T& container);
     template<typename T> void list_deleteTest(T& container);
 
-    void searchTest(const stack<int>& container);
     template<typename T> void stack_insertTest(T& container);
-    void deleteTest(stack<int>& container);
-
-    void searchTest(const queue<int>& container);
-    void deleteTest(queue<int>& container);
-
-    void searchTest(const priority_queue<int>& container);
-    template<typename T> void queue_deleteTest(T& container);
+    template<typename T> void stack_deleteTest(T& container);
 
     template<typename T> void set_searchTest(const T& container);
     template<typename T> void set_insertTest(T& container);

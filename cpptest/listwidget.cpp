@@ -104,16 +104,16 @@ void ListWidget::arrayHandler(QWidget* _list)
     }
 
     arr_searchTest(arr);
-    insertTest(arr);
-    deleteTest(arr);
+    insertTest();
+    deleteTest();
 
     printRes(lst);
 }
 
 void ListWidget::vectorHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     vector<int> v;
     for(int i = 0; i < N; i++){
@@ -124,13 +124,13 @@ void ListWidget::vectorHandler(QWidget* _list)
     vec_insertTest(v);
     vec_deleteTest(v);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::mapHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     map<int, int> m;
     for(int i = 0; i < N; i++){
@@ -141,13 +141,13 @@ void ListWidget::mapHandler(QWidget* _list)
     map_insertTest(m);
     map_deleteTest(m);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::multimapHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     multimap<int, int> m;
     for(int i = 0; i < N; i++){
@@ -158,13 +158,13 @@ void ListWidget::multimapHandler(QWidget* _list)
     map_insertTest(m);
     map_deleteTest(m);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::unordered_mapHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     unordered_map<int, int> m;
     for(int i = 0; i < N; i++){
@@ -175,13 +175,13 @@ void ListWidget::unordered_mapHandler(QWidget* _list)
     map_insertTest(m);
     map_deleteTest(m);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::unordered_multimapHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     unordered_multimap<int, int> m;
     for(int i = 0; i < N; i++){
@@ -192,7 +192,7 @@ void ListWidget::unordered_multimapHandler(QWidget* _list)
     map_insertTest(m);
     map_deleteTest(m);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::setHandler(QWidget* _list)
@@ -214,8 +214,8 @@ void ListWidget::setHandler(QWidget* _list)
 
 void ListWidget::multisetHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     multiset<int> s;
     for(int i = 0; i < N; i++){
@@ -226,13 +226,13 @@ void ListWidget::multisetHandler(QWidget* _list)
     set_insertTest(s);
     map_deleteTest(s);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::unordered_setHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     unordered_set<int> s;
     for(int i = 0; i < N; i++){
@@ -243,13 +243,13 @@ void ListWidget::unordered_setHandler(QWidget* _list)
     set_insertTest(s);
     map_deleteTest(s);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::unordered_multisetHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     unordered_multiset<int> s;
     for(int i = 0; i < N; i++){
@@ -260,13 +260,13 @@ void ListWidget::unordered_multisetHandler(QWidget* _list)
     set_insertTest(s);
     map_deleteTest(s);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::dequeHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     deque<int> d;
     for(int i = 0; i < N; i++){
@@ -277,7 +277,7 @@ void ListWidget::dequeHandler(QWidget* _list)
     vec_insertTest(d);
     vec_deleteTest(d);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::printRes(QListWidget* list)
@@ -289,8 +289,8 @@ void ListWidget::printRes(QListWidget* list)
 
 void ListWidget::forward_listHandler(QWidget* _list)
 {
-    QListWidget* list = (QListWidget*)_list;
-    list->clear();
+    QListWidget* lst = (QListWidget*)_list;
+    lst->clear();
 
     forward_list<int> l;
     for(int i = 0; i < N; i++){
@@ -301,7 +301,7 @@ void ListWidget::forward_listHandler(QWidget* _list)
     list_insertTest(l);
     list_deleteTest(l);
 
-    printRes(list);
+    printRes(lst);
 }
 
 void ListWidget::listHandler(QWidget* _list)
@@ -313,7 +313,6 @@ void ListWidget::listHandler(QWidget* _list)
     for(int i = 0; i < N; i++){
         l.push_front(rand());
     }
-
 
     list_searchTest(l);
     list_insertTest(l);
@@ -332,9 +331,9 @@ void ListWidget::stackHandler(QWidget* _list)
         l.push(rand());
     }
 
-    searchTest(l);
+    searchTest();
     stack_insertTest(l);
-    queue_deleteTest(l);
+    stack_deleteTest(l);
 
     printRes(lst);
 }
@@ -349,9 +348,9 @@ void ListWidget::queueHandler(QWidget* _list)
         q.push(rand());
     }
 
-    searchTest(q);
+    searchTest();
     stack_insertTest(q);
-    queue_deleteTest(q);
+    stack_deleteTest(q);
 
     printRes(lst);
 }
@@ -366,9 +365,9 @@ void ListWidget::priority_queueHandler(QWidget* _list)
         q.push(rand());
     }
 
-    searchTest(q);
+    searchTest();
     stack_insertTest(q);
-    queue_deleteTest(q);
+    stack_deleteTest(q);
 
     printRes(lst);
 }
@@ -419,12 +418,12 @@ void ListWidget::vec_deleteTest(T& container)
     results.deleteTest = time_spent;
 }
 
-void ListWidget::insertTest(array<int, N>& container)
+void ListWidget::insertTest()
 {
     results.insertTest = -1;
 }
 
-void ListWidget::deleteTest(array<int, N>& container)
+void ListWidget::deleteTest()
 {
     results.deleteTest = -1;
 }
@@ -475,12 +474,7 @@ void ListWidget::list_deleteTest(T& container)
     results.deleteTest = time_spent;
 }
 
-void ListWidget::searchTest(const stack<int>& container)
-{
-    results.searchTest = -1;
-}
-
-void ListWidget::searchTest(const queue<int>& container)
+void ListWidget::searchTest()
 {
     results.searchTest = -1;
 }
@@ -500,7 +494,7 @@ void ListWidget::stack_insertTest(T& container)
 }
 
 template<typename T>
-void ListWidget::queue_deleteTest(T& container)
+void ListWidget::stack_deleteTest(T& container)
 {
     clock_t begin = clock();
     for(int i = 0; i < N; i++){
@@ -509,11 +503,6 @@ void ListWidget::queue_deleteTest(T& container)
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     results.deleteTest = time_spent;
-}
-
-void ListWidget::searchTest(const priority_queue<int>& container)
-{
-    results.searchTest = -1;
 }
 
 template<typename T>
@@ -538,11 +527,9 @@ template<typename T>
 void ListWidget::set_insertTest(T& container)
 {
     int item;
-    size_t index;
     clock_t begin = clock();
     for(int i = 0; i < N; i++){
         item = rand();
-        index = rand() % container.size();
         container.insert(item);
     }
     clock_t end = clock();
@@ -572,11 +559,9 @@ template<typename T>
 void ListWidget::map_insertTest(T& container)
 {
     int item;
-    size_t index;
     clock_t begin = clock();
     for(int i = 0; i < N; i++){
         item = rand();
-        index = rand() % container.size();
         container.emplace(item, item);
     }
     clock_t end = clock();
