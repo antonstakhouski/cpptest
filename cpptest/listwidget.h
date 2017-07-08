@@ -47,36 +47,24 @@ class ListWidget : public QWidget
     QPushButton** rightButtons;
 
     QSignalMapper** signalMapper;
-
     testResults results;
-
-    void printRes(QListWidget* list);
 
 public:
     explicit ListWidget(QWidget* parent = 0);
     ~ListWidget();
 
-    template<typename T>
-    void containerTest(T& container);
+    void printRes(QListWidget* list);
 
-    void searchTest(const vector<int>& container);
-    void insertTest(vector<int>& container);
+    template<typename T> void vec_insertTest(T& container);
     template<typename T> void vec_deleteTest(T& container);
 
-    void searchTest(const array<int, N>& container);
+    template<typename T> void arr_searchTest(const T& container);
     void insertTest(array<int, N>& container);
     void deleteTest(array<int, N>& container);
 
-    void searchTest(const deque<int>& container);
-    void insertTest(deque<int>& container);
-
-    void searchTest(const forward_list<int>& container);
-    void insertTest(forward_list<int>& container);
-    void deleteTest(forward_list<int>& container);
-
-    void searchTest(const list<int>& container);
-    void insertTest(list<int>& container);
-    void deleteTest(list<int>& container);
+    template<typename T> void list_searchTest(const T& container);
+    template<typename T> void list_insertTest(T& container);
+    template<typename T> void list_deleteTest(T& container);
 
     void searchTest(const stack<int>& container);
     template<typename T> void stack_insertTest(T& container);
