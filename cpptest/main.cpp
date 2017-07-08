@@ -1,5 +1,6 @@
 #include <QApplication>
-#include "listwidget.h"
+
+#include "containerform.h"
 
 using namespace std;
 
@@ -7,8 +8,8 @@ int main(int argc, char *argv[])
 {
     QApplication a(argc, argv);
 
-    ListWidget w;
-    w.show();
+    ContainerForm form;
+    form.show();
 
     return a.exec();
 }
