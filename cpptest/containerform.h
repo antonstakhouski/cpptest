@@ -4,6 +4,12 @@
 #include <QWidget>
 #include <QListWidget>
 #include <QSignalMapper>
+#include <QButtonGroup>
+#include <QDebug>
+
+#include <iostream>
+#include <cstdio>
+#include <time.h>
 
 #include "containers/arrayTest.h"
 #include "containers/vectorTest.h"
@@ -52,12 +58,15 @@ public slots:
     // void unordered_multisetHandler(QWidget* list);
     // void unordered_mapHandler(QWidget* list);
     // void unordered_multimapHandler(QWidget* list);
+private slots:
+    void handleBtnPress(int id);
 
 private:
     Ui::ContainerForm *ui;
 
     QSignalMapper** signalMapper;
     testResults results;
+    QButtonGroup *m_btnGroup;
 };
 
 #endif // CONTAINERFORM_H

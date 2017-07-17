@@ -1,6 +1,3 @@
-#include <iostream>
-#include <cstdio>
-#include <time.h>
 
 #include "containerform.h"
 #include "ui_containerform.h"
@@ -9,44 +6,45 @@ using namespace std;
 
 ContainerForm::ContainerForm(QWidget *parent) :
     QWidget(parent),
-    ui(new Ui::ContainerForm)
+    ui(new Ui::ContainerForm),
+    m_btnGroup(new QButtonGroup(this))
 {
     ui->setupUi(this);
 
-    signalMapper = new QSignalMapper*[CONTAINERS_NUM];
+//    signalMapper = new QSignalMapper*[CONTAINERS_NUM];
 
-    signalMapper[0] = new QSignalMapper(this);
-    signalMapper[0]->setMapping(ui->btnArray, (QWidget*)ui->listWidget);
-    signalMapper[0]->setMapping(ui->btnArray_2, (QWidget*)ui->listWidget_2);
-    connect(ui->btnArray, SIGNAL(clicked()), signalMapper[0], SLOT(map()));
-    connect(ui->btnArray_2, SIGNAL(clicked()), signalMapper[0], SLOT(map()));
-    connect(signalMapper[0], SIGNAL(mapped(QWidget*)), this,
-            SLOT(arrayHandler(QWidget*)));
+//    signalMapper[0] = new QSignalMapper(this);
+//    signalMapper[0]->setMapping(ui->btnArray, (QWidget*)ui->listWidget);
+//    signalMapper[0]->setMapping(ui->btnArray_2, (QWidget*)ui->listWidget_2);
+//    connect(ui->btnArray, SIGNAL(clicked()), signalMapper[0], SLOT(map()));
+//    connect(ui->btnArray_2, SIGNAL(clicked()), signalMapper[0], SLOT(map()));
+//    connect(signalMapper[0], SIGNAL(mapped(QWidget*)), this,
+//            SLOT(arrayHandler(QWidget*)));
 
-    signalMapper[1] = new QSignalMapper(this);
-    signalMapper[1]->setMapping(ui->btnVector, (QWidget*)ui->listWidget);
-    signalMapper[1]->setMapping(ui->btnVector_2, (QWidget*)ui->listWidget_2);
-    connect(ui->btnVector, SIGNAL(clicked()), signalMapper[1], SLOT(map()));
-    connect(ui->btnVector_2, SIGNAL(clicked()), signalMapper[1], SLOT(map()));
-    connect(signalMapper[1], SIGNAL(mapped(QWidget*)), this,
-            SLOT(vectorHandler(QWidget*)));
+//    signalMapper[1] = new QSignalMapper(this);
+//    signalMapper[1]->setMapping(ui->btnVector, (QWidget*)ui->listWidget);
+//    signalMapper[1]->setMapping(ui->btnVector_2, (QWidget*)ui->listWidget_2);
+//    connect(ui->btnVector, SIGNAL(clicked()), signalMapper[1], SLOT(map()));
+//    connect(ui->btnVector_2, SIGNAL(clicked()), signalMapper[1], SLOT(map()));
+//    connect(signalMapper[1], SIGNAL(mapped(QWidget*)), this,
+//            SLOT(vectorHandler(QWidget*)));
 
-    signalMapper[3] = new QSignalMapper(this);
-    signalMapper[3]->setMapping(ui->btnDeque, (QWidget*)ui->listWidget);
-    signalMapper[3]->setMapping(ui->btnDeque_2, (QWidget*)ui->listWidget_2);
-    connect(ui->btnDeque, SIGNAL(clicked()), signalMapper[3], SLOT(map()));
-    connect(ui->btnDeque_2, SIGNAL(clicked()), signalMapper[3], SLOT(map()));
-    connect(signalMapper[3], SIGNAL(mapped(QWidget*)), this,
-            SLOT(dequeHandler(QWidget*)));
+//    signalMapper[3] = new QSignalMapper(this);
+//    signalMapper[3]->setMapping(ui->btnDeque, (QWidget*)ui->listWidget);
+//    signalMapper[3]->setMapping(ui->btnDeque_2, (QWidget*)ui->listWidget_2);
+//    connect(ui->btnDeque, SIGNAL(clicked()), signalMapper[3], SLOT(map()));
+//    connect(ui->btnDeque_2, SIGNAL(clicked()), signalMapper[3], SLOT(map()));
+//    connect(signalMapper[3], SIGNAL(mapped(QWidget*)), this,
+//            SLOT(dequeHandler(QWidget*)));
 
 
-    signalMapper[8] = new QSignalMapper(this);
-    signalMapper[8]->setMapping(ui->btnSet, (QWidget*)ui->listWidget);
-    signalMapper[8]->setMapping(ui->btnSet_2, (QWidget*)ui->listWidget_2);
-    connect(ui->btnSet, SIGNAL(clicked()), signalMapper[8], SLOT(map()));
-    connect(ui->btnSet_2, SIGNAL(clicked()), signalMapper[8], SLOT(map()));
-    connect(signalMapper[8], SIGNAL(mapped(QWidget*)), this,
-            SLOT(dequeHandler(QWidget*)));
+//    signalMapper[8] = new QSignalMapper(this);
+//    signalMapper[8]->setMapping(ui->btnSet, (QWidget*)ui->listWidget);
+//    signalMapper[8]->setMapping(ui->btnSet_2, (QWidget*)ui->listWidget_2);
+//    connect(ui->btnSet, SIGNAL(clicked()), signalMapper[8], SLOT(map()));
+//    connect(ui->btnSet_2, SIGNAL(clicked()), signalMapper[8], SLOT(map()));
+//    connect(signalMapper[8], SIGNAL(mapped(QWidget*)), this,
+//            SLOT(dequeHandler(QWidget*)));
 
 //    connect(signalMapper[1], SIGNAL(mapped(QWidget*)), this,
 //            SLOT(vectorHandler(QWidget*)));
@@ -78,6 +76,17 @@ ContainerForm::ContainerForm(QWidget *parent) :
 //            SLOT(unordered_mapHandler(QWidget*)));
 //    connect(signalMapper[15], SIGNAL(mapped(QWidget*)), this,
 //            SLOT(unordered_multimapHandler(QWidget*)));
+    m_btnGroup->addButton(ui->btnArray, 0);
+    m_btnGroup->addButton(ui->btnDeque, 1);
+    m_btnGroup->addButton(ui->btnVector, 2);
+    m_btnGroup->addButton(ui->btnFList, 3);
+    m_btnGroup->addButton(ui->btnList, 4);
+    m_btnGroup->addButton(ui->btnMap, 5);
+    m_btnGroup->addButton(ui->btnMmap, 6);
+    m_btnGroup->addButton(ui->btnMset, 7);
+    connect(m_btnGroup, static_cast<void(QButtonGroup::*)(int)>(&QButtonGroup::buttonClicked),
+        [=](int id){ handleBtnPress(id); });
+
 }
 
 ContainerForm::~ContainerForm()
@@ -182,11 +191,18 @@ void ContainerForm::setHandler(QWidget* _list)
 {
     QListWidget* lst = (QListWidget*)_list;
 
-    SetTest* tst = new SetTest();
-    results = tst->test();
-    delete tst;
+    //SetTest* tst = new SetTest();
+    //results = tst->test();
+    //delete tst;
 
     printRes(lst);
+}
+
+void ContainerForm::handleBtnPress(int id)
+{
+    if (m_btnGroup->id(ui->btnArray) == id) {
+        qDebug()<<" YEP!";
+    }
 }
 
 // void ContainerForm::multisetHandler(QWidget* _list)
