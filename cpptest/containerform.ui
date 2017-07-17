@@ -101,7 +101,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnUset">
+      <widget class="QPushButton" name="btnUnSet">
        <property name="text">
         <string>Unordered Set</string>
        </property>
@@ -122,7 +122,7 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="btnMmap_2">
+      <widget class="QPushButton" name="btnUnMmap">
        <property name="text">
         <string>Unordered Multimap</string>
        </property>
@@ -146,105 +146,105 @@
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_18">
+      <widget class="QPushButton" name="btnVector_2">
        <property name="text">
         <string>Vector</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_19">
+      <widget class="QPushButton" name="btnDeque_2">
        <property name="text">
         <string>Deque</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_20">
+      <widget class="QPushButton" name="btnFList_2">
        <property name="text">
         <string>Forward List</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_21">
+      <widget class="QPushButton" name="btnList_2">
        <property name="text">
         <string>List</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_22">
+      <widget class="QPushButton" name="btnStack_2">
        <property name="text">
         <string>Stack</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_23">
+      <widget class="QPushButton" name="btnQueue_2">
        <property name="text">
         <string>Queue</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_24">
+      <widget class="QPushButton" name="btnPQueue_2">
        <property name="text">
         <string>Priority Queue</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_25">
+      <widget class="QPushButton" name="btnSet_2">
        <property name="text">
         <string>Set</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_26">
+      <widget class="QPushButton" name="btnMset_2">
        <property name="text">
         <string>Multiset</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_27">
+      <widget class="QPushButton" name="btnMap_2">
        <property name="text">
         <string>Map</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_28">
+      <widget class="QPushButton" name="btnMmap_2">
        <property name="text">
         <string>Multimap</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_29">
+      <widget class="QPushButton" name="btnUnSet_2">
        <property name="text">
         <string>Unordered Set</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_30">
+      <widget class="QPushButton" name="btnUnMset_2">
        <property name="text">
         <string>Unordered Multiset</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_31">
+      <widget class="QPushButton" name="btnUnMap_2">
        <property name="text">
         <string>Unordered Map</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="pushButton_32">
+      <widget class="QPushButton" name="btnUnMmap_2">
        <property name="text">
         <string>Unordered Multimap</string>
        </property>
