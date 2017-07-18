@@ -1,10 +1,9 @@
 #ifndef CONTAINERTEST_H
 #define CONTAINERTEST_H
 
-#include "constants.h"
 #include "testResults.h"
 
-#define N 100000
+#define N 10000
 
 class ContainerTest
 {

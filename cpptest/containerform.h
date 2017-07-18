@@ -13,16 +13,16 @@
 
 #include "containers/arrayTest.h"
 #include "containers/vectorTest.h"
-// #include "containers/forward_listTest.h"
+#include "containers/forward_listTest.h"
 #include "containers/dequeTest.h"
-// #include "containers/listTest.h"
-// #include "containers/stackTest.h"
-// #include "containers/queueTest.h"
+#include "containers/listTest.h"
+#include "containers/stackTest.h"
+#include "containers/queueTest.h"
 #include "containers/setTest.h"
-// #include "containers/mapTest.h"
-// #include "containers/unordered_setTest.h"
-// #include "containers/unordered_setTest.h"
-//
+#include "containers/mapTest.h"
+#include "containers/unordered_setTest.h"
+#include "containers/unordered_setTest.h"
+
 #define CONTAINERS_NUM 16
 
 using namespace std;
@@ -42,29 +42,28 @@ public:
     void printRes(QListWidget* list);
 
 public slots:
-    void arrayHandler(QWidget* list);
-    void vectorHandler(QWidget* list);
-    // void forward_listHandler(QWidget* list);
-    void dequeHandler(QWidget* list);
-    // void listHandler(QWidget* list);
-    // void stackHandler(QWidget* list);
-    // void queueHandler(QWidget* list);
-    // void priority_queueHandler(QWidget* list);
-    void setHandler(QWidget* list);
-    // void multisetHandler(QWidget* list);
-    // void mapHandler(QWidget* list);
-    // void multimapHandler(QWidget* list);
-    // void unordered_setHandler(QWidget* list);
-    // void unordered_multisetHandler(QWidget* list);
-    // void unordered_mapHandler(QWidget* list);
-    // void unordered_multimapHandler(QWidget* list);
+    void arrayHandler(QListWidget* list);
+    void vectorHandler(QListWidget* list);
+    void forward_listHandler(QListWidget* list);
+    void dequeHandler(QListWidget* list);
+    void listHandler(QListWidget* list);
+    void stackHandler(QListWidget* list);
+    void queueHandler(QListWidget* list);
+    void priority_queueHandler(QListWidget* list);
+    void setHandler(QListWidget* list);
+    void multisetHandler(QListWidget* list);
+    void mapHandler(QListWidget* list);
+    void multimapHandler(QListWidget* list);
+    void unordered_setHandler(QListWidget* list);
+    void unordered_multisetHandler(QListWidget* list);
+    void unordered_mapHandler(QListWidget* list);
+    void unordered_multimapHandler(QListWidget* list);
 private slots:
     void handleBtnPress(int id);
 
 private:
     Ui::ContainerForm *ui;
 
-    QSignalMapper** signalMapper;
     testResults results;
     QButtonGroup *m_btnGroup;
 };

@@ -16,11 +16,11 @@ protected:
     void searchMidTest();
     void searchTailTest();
 
-    void insHeadTest();
-    void insMidTest();
-    void insTailTest();
-
-    void delHeadTest();
+    // void insHeadTest();
+    // void insMidTest();
+    // void insTailTest();
+    //
+    // void delHeadTest();
     // void delMidTest();
     // void delTailTest();
 };
