@@ -30,11 +30,16 @@ SOURCES += *.cpp \
     containers/forward_listTest.cpp \
     containers/listTest.cpp \
     containers/mapTest.cpp \
+    containers/multimapTest.cpp \
     containers/queueTest.cpp \
+    containers/priority_queueTest.cpp \
     containers/setTest.cpp \
+    containers/multisetTest.cpp \
     containers/stackTest.cpp \
     containers/unordered_mapTest.cpp \
+    containers/unordered_multimapTest.cpp \
     containers/unordered_setTest.cpp \
+    containers/unordered_multisetTest.cpp \
     containers/vectorTest.cpp
 
 HEADERS  += *.h \
@@ -44,12 +49,17 @@ HEADERS  += *.h \
     containers/forward_listTest.h \
     containers/listTest.h \
     containers/mapTest.h \
+    containers/multimapTest.h \
     containers/queueTest.h \
+    containers/priority_queueTest.h \
     containers/setTest.h \
+    containers/multisetTest.h \
     containers/stackTest.h \
     containers/testResults.h \
     containers/unordered_mapTest.h \
+    containers/unordered_multimapTest.h \
     containers/unordered_setTest.h \
+    containers/unordered_multisetTest.h \
     containers/vectorTest.h
 
 FORMS    += \

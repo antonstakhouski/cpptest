@@ -1,3 +1,6 @@
+#ifndef STACKTEST_H
+#define STACKTEST_H
+
 #include <stack>
 #include <iostream>
 
@@ -16,4 +19,6 @@ protected:
     void insTailTest();
     void delTailTest();
 };
+
+#endif // STACKTEST_H
 

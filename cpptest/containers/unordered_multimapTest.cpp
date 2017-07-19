@@ -1,6 +1,6 @@
-#include "mapTest.h"
+#include "unordered_multimapTest.h"
 
-MapTest::MapTest() : ContainerTest()
+UnorderedMultimapTest::UnorderedMultimapTest() : ContainerTest()
 {
     for(int i = 0; i < N; i++){
         srand(time(NULL));
@@ -8,12 +8,12 @@ MapTest::MapTest() : ContainerTest()
     }
 }
 
-MapTest::~MapTest()
+UnorderedMultimapTest::~UnorderedMultimapTest()
 {
 
 }
 
-void MapTest::searchMidTest()
+void UnorderedMultimapTest::searchMidTest()
 {
    int key;
    clock_t begin = clock();
@@ -29,7 +29,7 @@ void MapTest::searchMidTest()
    res.searchMidTest = time_spent;
 }
 
-void MapTest::insMidTest()
+void UnorderedMultimapTest::insMidTest()
 {
    clock_t begin = clock();
    for(int i = 0; i < N; i++){
@@ -41,7 +41,7 @@ void MapTest::insMidTest()
    res.searchMidTest = time_spent;
 }
 
-void MapTest::delMidTest()
+void UnorderedMultimapTest::delMidTest()
 {
     size_t index;
     clock_t begin = clock();

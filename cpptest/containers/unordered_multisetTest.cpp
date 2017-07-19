@@ -1,6 +1,6 @@
-#include "setTest.h"
+#include "unordered_multisetTest.h"
 
-SetTest::SetTest() : ContainerTest()
+UnorderedMultisetTest::UnorderedMultisetTest() : ContainerTest()
 {
    for(int i = 0; i < N; i++){
        srand(time(NULL));
@@ -8,12 +8,12 @@ SetTest::SetTest() : ContainerTest()
    }
 }
 
-SetTest::~SetTest()
+UnorderedMultisetTest::~UnorderedMultisetTest()
 {
 
 }
 
-void SetTest::searchMidTest()
+void UnorderedMultisetTest::searchMidTest()
 {
    int key;
    clock_t begin = clock();
@@ -29,7 +29,7 @@ void SetTest::searchMidTest()
    res.searchMidTest = time_spent;
 }
 
-void SetTest::insMidTest()
+void UnorderedMultisetTest::insMidTest()
 {
    int item;
    clock_t begin = clock();
@@ -42,7 +42,7 @@ void SetTest::insMidTest()
    res.insMidTest = time_spent;
 }
 
-void SetTest::delMidTest()
+void UnorderedMultisetTest::delMidTest()
 {
     size_t index;
     clock_t begin = clock();

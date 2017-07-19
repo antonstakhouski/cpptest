@@ -1,27 +1,27 @@
-#include "setTest.h"
+#include "multimapTest.h"
 
-SetTest::SetTest() : ContainerTest()
+MultimapTest::MultimapTest() : ContainerTest()
 {
-   for(int i = 0; i < N; i++){
-       srand(time(NULL));
-       s.insert(rand());
-   }
+    for(int i = 0; i < N; i++){
+        srand(time(NULL));
+        m.emplace(rand(), rand());
+    }
 }
 
-SetTest::~SetTest()
+MultimapTest::~MultimapTest()
 {
 
 }
 
-void SetTest::searchMidTest()
+void MultimapTest::searchMidTest()
 {
    int key;
    clock_t begin = clock();
    for(int i = 0; i < N; i++){
        srand(time(NULL));
        key = rand();
-       if(s.count(key) > 0){
-           cout << *(s.find(key)) << endl;
+       if(m.count(key) > 0){
+           cout << m.find(key)->second << endl;
        }
    }
    clock_t end = clock();
@@ -29,26 +29,25 @@ void SetTest::searchMidTest()
    res.searchMidTest = time_spent;
 }
 
-void SetTest::insMidTest()
+void MultimapTest::insMidTest()
 {
-   int item;
    clock_t begin = clock();
-    for(int i = 0; i < N; i++){
-        item = rand();
-        s.insert(item);
-    }
+   for(int i = 0; i < N; i++){
+       srand(time(NULL));
+       m.emplace(rand(), rand());
+   }
    clock_t end = clock();
    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-   res.insMidTest = time_spent;
+   res.searchMidTest = time_spent;
 }
 
-void SetTest::delMidTest()
+void MultimapTest::delMidTest()
 {
     size_t index;
     clock_t begin = clock();
     for(int i = 0; i < N; i++){
-        index = rand() % s.size();
-        s.erase(index);
+        index = rand();
+        m.erase(index);
     }
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;

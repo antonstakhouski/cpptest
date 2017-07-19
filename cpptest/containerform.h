@@ -18,10 +18,15 @@
 #include "containers/listTest.h"
 #include "containers/stackTest.h"
 #include "containers/queueTest.h"
+#include "containers/priority_queueTest.h"
 #include "containers/setTest.h"
+#include "containers/multisetTest.h"
 #include "containers/mapTest.h"
+#include "containers/multimapTest.h"
 #include "containers/unordered_setTest.h"
-#include "containers/unordered_setTest.h"
+#include "containers/unordered_multisetTest.h"
+#include "containers/unordered_mapTest.h"
+#include "containers/unordered_multimapTest.h"
 
 #define CONTAINERS_NUM 16
 

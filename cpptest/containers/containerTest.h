@@ -3,7 +3,7 @@
 
 #include "testResults.h"
 
-#define N 10000
+#define N 10
 
 class ContainerTest
 {

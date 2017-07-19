@@ -1,6 +1,6 @@
-#include "queueTest.h"
+#include "priority_queueTest.h"
 
-QueueTest::QueueTest() : ContainerTest()
+PriorityQueueTest::PriorityQueueTest() : ContainerTest()
 {
     for(int i = 0; i < N; i++){
         srand(time(NULL));
@@ -8,34 +8,23 @@ QueueTest::QueueTest() : ContainerTest()
     }
 }
 
-QueueTest::~QueueTest()
+PriorityQueueTest::~PriorityQueueTest()
 {
 
 }
 
-void QueueTest::searchHeadTest()
+void PriorityQueueTest::searchHeadTest()
 {
     clock_t begin = clock();
     for(int i = 0; i < N; i++){
-        cout << q.front() << endl;
+        cout << q.top() << endl;
     }
     clock_t end = clock();
     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
     res.searchHeadTest = time_spent;
 }
 
-void QueueTest::searchTailTest()
-{
-    clock_t begin = clock();
-    for(int i = 0; i < N; i++){
-        cout << q.back() << endl;
-    }
-    clock_t end = clock();
-    double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-    res.searchTailTest = time_spent;
-}
-
-void QueueTest::insTailTest()
+void PriorityQueueTest::insTailTest()
 {
     clock_t begin = clock();
     for(int i = 0; i < N; i++){
@@ -47,7 +36,7 @@ void QueueTest::insTailTest()
     res.insTailTest = time_spent;
 }
 
-void QueueTest::delHeadTest()
+void PriorityQueueTest::delHeadTest()
 {
     clock_t begin = clock();
     for(int i = 0; i < N; i++){

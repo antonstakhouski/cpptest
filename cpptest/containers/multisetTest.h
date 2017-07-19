@@ -1,5 +1,5 @@
-#ifndef SETTEST_H
-#define SETTEST_H
+#ifndef MULTISETTEST_H
+#define MULTISETTEST_H
 
 #include <set>
 #include <iostream>
@@ -8,12 +8,12 @@
 
 using namespace std;
 
-class SetTest : public ContainerTest
+class MultisetTest : public ContainerTest
 {
    set<int> s;
 public:
-   explicit SetTest();
-   ~SetTest();
+   explicit MultisetTest();
+   ~MultisetTest();
 protected:
    void searchMidTest();
 
@@ -22,5 +22,5 @@ protected:
    void delMidTest();
 };
 
-#endif // SETTEST_H
+#endif // MULTISETTEST_H
 

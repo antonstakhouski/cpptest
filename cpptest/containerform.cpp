@@ -172,496 +172,85 @@ void ContainerForm::forward_listHandler(QListWidget* _list)
 
 void ContainerForm::listHandler(QListWidget* _list)
 {
-    // ListTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    ListTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::stackHandler(QListWidget* _list)
 {
-    // StackTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    StackTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::queueHandler(QListWidget* _list)
 {
-    // QueueTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    QueueTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::priority_queueHandler(QListWidget* _list)
 {
-    // PriorityQueueTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    PriorityQueueTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::setHandler(QListWidget* _list)
 {
-    // SetTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    SetTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::multisetHandler(QListWidget* _list)
 {
-    // MultisetTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    MultisetTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::mapHandler(QListWidget* _list)
 {
-    // MapTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    MapTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::multimapHandler(QListWidget* _list)
 {
-    // MultimapTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    MultimapTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::unordered_setHandler(QListWidget* _list)
 {
-    // UnorderedSetTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    UnorderedSetTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::unordered_multisetHandler(QListWidget* _list)
 {
-    // UnorderedMultisetTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    UnorderedMultisetTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::unordered_mapHandler(QListWidget* _list)
 {
-    // UnorderedMapTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    UnorderedMapTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
 void ContainerForm::unordered_multimapHandler(QListWidget* _list)
 {
-    // UnorderedMultimapTest tst;
-    // results = tst.test();
-    // printRes(_list);
+    UnorderedMultimapTest tst;
+    results = tst.test();
+    printRes(_list);
 }
 
-//
-// void ContainerForm::mapHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     map<int, int> m;
-//     for(int i = 0; i < N; i++){
-//         m.emplace(rand(), rand());
-//     }
-//
-//     map_searchTest(m);
-//     map_insertTest(m);
-//     map_deleteTest(m);
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::multimapHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     multimap<int, int> m;
-//     for(int i = 0; i < N; i++){
-//         m.emplace(rand(), rand());
-//     }
-//
-//     map_searchTest(m);
-//     map_insertTest(m);
-//     map_deleteTest(m);
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::unordered_mapHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     unordered_map<int, int> m;
-//     for(int i = 0; i < N; i++){
-//         m.emplace(rand(), rand());
-//     }
-//
-//     map_searchTest(m);
-//     map_insertTest(m);
-//     map_deleteTest(m);
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::unordered_multimapHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     unordered_multimap<int, int> m;
-//     for(int i = 0; i < N; i++){
-//         m.emplace(rand(), rand());
-//     }
-//
-//     map_searchTest(m);
-//     map_insertTest(m);
-//     map_deleteTest(m);
-//
-//     printRes(lst);
-// }
-
-// void ContainerForm::multisetHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     multiset<int> s;
-//     for(int i = 0; i < N; i++){
-//         s.insert(rand());
-//     }
-//
-//     set_searchTest(s);
-//     set_insertTest(s);
-//     map_deleteTest(s);
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::unordered_setHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     unordered_set<int> s;
-//     for(int i = 0; i < N; i++){
-//         s.insert(rand());
-//     }
-//
-//     set_searchTest(s);
-//     set_insertTest(s);
-//     map_deleteTest(s);
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::unordered_multisetHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     unordered_multiset<int> s;
-//     for(int i = 0; i < N; i++){
-//         s.insert(rand());
-//     }
-//
-//     set_searchTest(s);
-//     set_insertTest(s);
-//     map_deleteTest(s);
-//
-//     printRes(lst);
-// }
-
-// void ContainerForm::forward_listHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     forward_list<int> l;
-//     for(int i = 0; i < N; i++){
-//         l.push_front(rand());
-//     }
-//
-//     list_searchTest(l);
-//     list_insertTest(l);
-//     list_deleteTest(l);
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::listHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     ListTest* tst = new ListTest();
-//     results = tst->test();
-//     delete tst;
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::stackHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     stack<int> l;
-//     for(int i = 0; i < N; i++){
-//         l.push(rand());
-//     }
-//
-//     searchTest();
-//     stack_insertTest(l);
-//     stack_deleteTest(l);
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::queueHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     queue<int> q;
-//     for(int i = 0; i < N; i++){
-//         q.push(rand());
-//     }
-//
-//     searchTest();
-//     stack_insertTest(q);
-//     stack_deleteTest(q);
-//
-//     printRes(lst);
-// }
-//
-// void ContainerForm::priority_queueHandler(QListWidget* _list)
-// {
-//     QListWidget* lst = (QListWidget*)_list;
-//     lst->clear();
-//
-//     priority_queue<int> q;
-//     for(int i = 0; i < N; i++){
-//         q.push(rand());
-//     }
-//
-//     searchTest();
-//     stack_insertTest(q);
-//     stack_deleteTest(q);
-//
-//     printRes(lst);
-// }
-//
-// template<typename T>
-// void ContainerForm::arr_searchTest(const T& container)
-// {
-//     int item;
-//     size_t index;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         index = rand() % N;
-//         item = *(container.begin() + index);
-//         cout << item << endl;
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.searchTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::vec_insertTest(T& container)
-// {
-//     int item;
-//     size_t index;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         item = rand();
-//         index = rand() % container.size();
-//         container.insert(container.begin() + index, item);
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.insertTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::vec_deleteTest(T& container)
-// {
-//     size_t index;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         index = rand() % container.size();
-//         container.erase(container.begin() + index);
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.deleteTest = time_spent;
-// }
-//
-// void ContainerForm::insertTest()
-// {
-//     results.insertTest = -1;
-// }
-//
-// void ContainerForm::deleteTest()
-// {
-//     results.deleteTest = -1;
-// }
-//
-// template<typename T>
-// void ContainerForm::list_searchTest(const T& container)
-// {
-//     int item;
-//     size_t index;
-//     clock_t begin = clock();
-//     auto iterator = container.begin();
-//     for(int i = 0; i < N; i++){
-//         iterator = container.begin();
-//         index = rand() % N;
-//         for(size_t j = 0; j < index; j++)
-//             iterator++;
-//         item = *(iterator);
-//         cout << item << endl;
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.searchTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::list_insertTest(T& container)
-// {
-//     int item;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         item = rand();
-//         container.push_front(item);
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.insertTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::list_deleteTest(T& container)
-// {
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         container.pop_front();
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.deleteTest = time_spent;
-// }
-//
-// void ContainerForm::searchTest()
-// {
-//     results.searchTest = -1;
-// }
-//
-// template<typename T>
-// void ContainerForm::stack_insertTest(T& container)
-// {
-//     int item;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         item = rand();
-//         container.push(item);
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.insertTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::stack_deleteTest(T& container)
-// {
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         container.pop();
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.deleteTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::set_searchTest(const T& container)
-// {
-//     int item;
-//     size_t index;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         index = rand() % N;
-//         if(container.count(index)){
-//             item = *(container.find(index));
-//             cout << item << endl;
-//         }
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.searchTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::set_insertTest(T& container)
-// {
-//     int item;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         item = rand();
-//         container.insert(item);
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.insertTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::map_searchTest(const T& container)
-// {
-//     int item;
-//     size_t index;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         index = rand() % N;
-//         if(container.count(index) > 0){
-//             item = container.find(index)->second;
-//             cout << item << endl;
-//         }
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.searchTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::map_insertTest(T& container)
-// {
-//     int item;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         item = rand();
-//         container.emplace(item, item);
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.insertTest = time_spent;
-// }
-//
-// template<typename T>
-// void ContainerForm::map_deleteTest(T& container)
-// {
-//     size_t index;
-//     clock_t begin = clock();
-//     for(int i = 0; i < N; i++){
-//         index = rand() % container.size();
-//         container.erase(index);
-//     }
-//     clock_t end = clock();
-//     double time_spent = (double)(end - begin) / CLOCKS_PER_SEC;
-//     results.deleteTest = time_spent;
-// }
-/*  */

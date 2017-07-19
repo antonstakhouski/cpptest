@@ -1,3 +1,6 @@
+#ifndef FORWARD_LISTTEST_H
+#define FORWARD_LISTTEST_H
+
 #include <forward_list>
 #include <iostream>
 
@@ -16,12 +19,14 @@ protected:
     void searchMidTest();
     void searchTailTest();
 
-    // void insHeadTest();
-    // void insMidTest();
-    // void insTailTest();
-    //
-    // void delHeadTest();
-    // void delMidTest();
-    // void delTailTest();
+    void insHeadTest();
+    void insMidTest();
+    void insTailTest();
+
+    void delHeadTest();
+    void delMidTest();
+    void delTailTest();
 };
+
+#endif // FORWARD_LISTTEST_H
 

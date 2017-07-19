@@ -1,6 +1,6 @@
-#include "setTest.h"
+#include "multisetTest.h"
 
-SetTest::SetTest() : ContainerTest()
+MultisetTest::MultisetTest() : ContainerTest()
 {
    for(int i = 0; i < N; i++){
        srand(time(NULL));
@@ -8,12 +8,12 @@ SetTest::SetTest() : ContainerTest()
    }
 }
 
-SetTest::~SetTest()
+MultisetTest::~MultisetTest()
 {
 
 }
 
-void SetTest::searchMidTest()
+void MultisetTest::searchMidTest()
 {
    int key;
    clock_t begin = clock();
@@ -29,7 +29,7 @@ void SetTest::searchMidTest()
    res.searchMidTest = time_spent;
 }
 
-void SetTest::insMidTest()
+void MultisetTest::insMidTest()
 {
    int item;
    clock_t begin = clock();
@@ -42,7 +42,7 @@ void SetTest::insMidTest()
    res.insMidTest = time_spent;
 }
 
-void SetTest::delMidTest()
+void MultisetTest::delMidTest()
 {
     size_t index;
     clock_t begin = clock();
