@@ -1,6 +1,6 @@
 #include "SmartResizer.h"
 
-SmartResizer::SmartResizer(QObject *parent) : QObject(parent), m_lock(false), m_handleWidget(Q_NULLPTR), m_startResize(0,0)
+SmartResizer::SmartResizer(QObject *parent) : QObject(parent), m_handleWidget(Q_NULLPTR), m_lock(false), m_startResize(0,0)
 {
 
 }
@@ -25,7 +25,23 @@ bool SmartResizer::eventFilter(QObject *watched, QEvent *event)
     if(watched == m_handleWidget)
     {
         if(event->type()==QEvent::Resize) {
+
             QResizeEvent * e = reinterpret_cast<QResizeEvent*>(event);
+
+            int oldHeight = e->oldSize().height();
+            int oldWidth= e->oldSize().width();
+
+            int newHeight = e->size().height();
+            int newWidth= e->size().width();
+
+            qDebug() << "OldRatio: " << (float)oldWidth / oldHeight;
+            qDebug() << "NewRatio: " << (float)newWidth / newHeight;
+
+            if (oldWidth * newHeight > newWidth * oldHeight)
+                const_cast<QSize&>(e->size()) = QSize(newWidth, (newWidth * oldHeight) / oldWidth);
+            else
+                const_cast<QSize&>(e->size()) = QSize((newHeight * oldWidth) / oldHeight, newHeight);
+            qDebug() << "SmartResizeRatio: " << (float)e->size().width() / e->size().height();
         }
     }
     return QObject::eventFilter(watched,event);

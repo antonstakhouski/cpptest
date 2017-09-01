@@ -7,6 +7,7 @@
 #include <QEvent>
 #include <QSize>
 #include <QResizeEvent>
+#include <QDebug>
 
 class SmartResizer : public QObject
 {
