@@ -17,5 +17,5 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_checkBox_clicked(bool checked)
 {
-
+    r->lockResolution(checked);
 }

@@ -23,6 +23,7 @@ private:
     QWidget* m_handleWidget;
     bool m_lock;
     QSize m_startResize;
+    bool eventBlocked;
 };
 
 #endif // SMARTRESIZER_H
