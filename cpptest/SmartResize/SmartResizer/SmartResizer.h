@@ -15,6 +15,7 @@ class SmartResizer : public QObject
 public:
     explicit SmartResizer(QObject *parent = 0);
     void installWidget(QWidget *widg);
+    void processMoveEvent(QMouseEvent* e);
 public slots:
     void lockResolution(bool lock);
 protected:

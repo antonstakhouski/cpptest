@@ -9,7 +9,7 @@ MainWindow::MainWindow(QWidget *parent) :
     ui->setupUi(this);
     r->installWidget(this);
     setMouseTracking(true);
-    qApp->installEventFilter(this);
+    qApp->installEventFilter(r);
 }
 
 MainWindow::~MainWindow()
@@ -20,15 +20,4 @@ MainWindow::~MainWindow()
 void MainWindow::on_checkBox_clicked(bool checked)
 {
     r->lockResolution(checked);
-}
-
-bool MainWindow::eventFilter(QObject *obj, QEvent *event)
-{
-  if (event->type() == QEvent::MouseMove)
-  {
-    (void)obj;
-    QMouseEvent* e= static_cast<QMouseEvent*>(event);
-    qDebug() << e->pos();
-  }
-  return false;
 }

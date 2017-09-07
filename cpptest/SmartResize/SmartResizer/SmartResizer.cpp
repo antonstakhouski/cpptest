@@ -50,14 +50,27 @@ bool SmartResizer::eventFilter(QObject *watched, QEvent *event)
         }
     }
 
+  if (event->type() == QEvent::MouseMove && m_lock)
+  {
+    (void)watched;
+    QMouseEvent* e= static_cast<QMouseEvent*>(event);
+
+    const int sensivity = 5;
+    if (
+            e->pos().x() < sensivity ||
+            e->pos().y() < sensivity ||
+            e->pos().x() > (m_handleWidget->width() - sensivity) ||
+            e->pos().y() > (m_handleWidget->height() - sensivity)
+            )
+    {
+        qDebug() << "resizing" << e->pos();
+    }
+    return false;
+  }
+
 //    if (event->type() == QEvent::MouseButtonPress) {
 //        qDebug() << "Btn pressed";
 //    }
 
-//    if (event->type() == QEvent::MouseMove) {
-//        QMouseEvent* e = reinterpret_cast<QMouseEvent*>(event);
-//        qDebug() << "Hello";
-//        qDebug() << e->pos();
-//    }
     return QObject::eventFilter(watched,event);
 }
