@@ -10,6 +10,7 @@ void SmartResizer::installWidget(QWidget *widg)
 {
     widg->installEventFilter(this);
     m_handleWidget = widg;
+//    m_handleWidget->setMouseTracking(true);
 }
 
 void SmartResizer::lockResolution(bool lock)
@@ -18,16 +19,18 @@ void SmartResizer::lockResolution(bool lock)
         return;
 
     m_lock = lock;
+
     m_startResize = m_handleWidget->size();
+    m_handleWidget->setFixedSize(m_handleWidget->size());
 }
 
 bool SmartResizer::eventFilter(QObject *watched, QEvent *event)
 {
-    if(watched == m_handleWidget)
+    if (watched == m_handleWidget)
     {
         if((event->type() == QEvent::Resize) && m_lock) {
 
-            QResizeEvent * e = reinterpret_cast<QResizeEvent*>(event);
+            QResizeEvent* e = reinterpret_cast<QResizeEvent*>(event);
 
             float ratio = (float) m_startResize.width() / m_startResize.height();
 
@@ -46,5 +49,15 @@ bool SmartResizer::eventFilter(QObject *watched, QEvent *event)
             eventBlocked = false;
         }
     }
+
+//    if (event->type() == QEvent::MouseButtonPress) {
+//        qDebug() << "Btn pressed";
+//    }
+
+//    if (event->type() == QEvent::MouseMove) {
+//        QMouseEvent* e = reinterpret_cast<QMouseEvent*>(event);
+//        qDebug() << "Hello";
+//        qDebug() << e->pos();
+//    }
     return QObject::eventFilter(watched,event);
 }
