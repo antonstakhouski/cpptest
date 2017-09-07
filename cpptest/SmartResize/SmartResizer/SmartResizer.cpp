@@ -1,5 +1,4 @@
 #include "SmartResizer.h"
-#include <cstdlib>
 
 SmartResizer::SmartResizer(QObject *parent) : QObject(parent), m_handleWidget(Q_NULLPTR), m_lock(false), m_startResize(0,0), eventBlocked(false)
 {
@@ -55,15 +54,32 @@ bool SmartResizer::eventFilter(QObject *watched, QEvent *event)
     (void)watched;
     QMouseEvent* e= static_cast<QMouseEvent*>(event);
 
-    const int sensivity = 5;
-    if (
-            e->pos().x() < sensivity ||
-            e->pos().y() < sensivity ||
-            e->pos().x() > (m_handleWidget->width() - sensivity) ||
-            e->pos().y() > (m_handleWidget->height() - sensivity)
-            )
+    const int sensivity = 15;
+    if (((e->pos().x() < sensivity) && (e->pos().y() < sensivity))||
+            ((e->pos().x() > (m_handleWidget->width() - sensivity)) && (e->pos().y() > (m_handleWidget->height() - sensivity))))
     {
+        m_handleWidget->setCursor(Qt::SizeFDiagCursor);
         qDebug() << "resizing" << e->pos();
+    } else if (((e->pos().x() > (m_handleWidget->width() - sensivity)) && (e->pos().y() < sensivity)) ||
+            ((e->pos().x() < sensivity) && (e->pos().y() > (m_handleWidget->height() - sensivity))))
+    {
+        m_handleWidget->setCursor(Qt::SizeBDiagCursor);
+        qDebug() << "resizing" << e->pos();
+    } else if (e->pos().x() < sensivity ||
+            e->pos().x() > (m_handleWidget->width() - sensivity))
+    {
+        m_handleWidget->setCursor(Qt::SizeHorCursor);
+        qDebug() << "resizing" << e->pos();
+    }
+    else if (e->pos().y() < sensivity ||
+            e->pos().y() > (m_handleWidget->height() - sensivity))
+    {
+        m_handleWidget->setCursor(Qt::SizeVerCursor);
+        qDebug() << "resizing" << e->pos();
+    }
+    else
+    {
+        m_handleWidget->setCursor(Qt::ArrowCursor);
     }
     return false;
   }

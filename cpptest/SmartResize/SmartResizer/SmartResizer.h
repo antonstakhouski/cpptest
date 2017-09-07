@@ -8,6 +8,9 @@
 #include <QSize>
 #include <QResizeEvent>
 #include <QDebug>
+#include <QCursor>
+
+#include <cstdlib>
 
 class SmartResizer : public QObject
 {
