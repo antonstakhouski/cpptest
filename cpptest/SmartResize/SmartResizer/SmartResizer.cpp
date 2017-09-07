@@ -1,4 +1,5 @@
 #include "SmartResizer.h"
+#include <cstdlib>
 
 SmartResizer::SmartResizer(QObject *parent) : QObject(parent), m_handleWidget(Q_NULLPTR), m_lock(false), m_startResize(0,0), eventBlocked(false)
 {
@@ -26,28 +27,21 @@ bool SmartResizer::eventFilter(QObject *watched, QEvent *event)
     {
         if((event->type() == QEvent::Resize) && m_lock) {
 
-//            if (eventBlocked) {
-//                event->ignore();
-//                return QObject::eventFilter(watched,event);
-//            }
-
             QResizeEvent * e = reinterpret_cast<QResizeEvent*>(event);
 
-            int oldHeight = m_startResize.height();
-            int oldWidth= m_startResize.width();
+            float ratio = (float) m_startResize.width() / m_startResize.height();
 
-            int newHeight = e->size().height();
-            int newWidth= e->size().width();
+            QSize maxToW(e->size().width(), e->size().width() / ratio);
+            QSize maxToH(e->size().height() * ratio, e->size().height());
 
-            qDebug() << "OldRatio: " << (float)oldWidth / oldHeight;
-            qDebug() << "NewRatio: " << (float)newWidth / newHeight;
+            qDebug() << e->oldSize();
+            qDebug() << e->size();
 
             eventBlocked = true;
-            if ((oldWidth * newHeight) > (newWidth * oldHeight))
-                qDebug()<< QSize(newWidth, (newWidth * oldHeight) / oldWidth);
+            if (abs(e->size().width() - e->oldSize().width()) >= abs(e->size().height() - e->oldSize().height()))
+                qDebug() << "To W" << maxToW << (float)maxToW.width() / maxToW.height();
             else
-                 qDebug()<< QSize((newHeight * oldWidth) / oldHeight, newHeight);
-            qDebug() << "SmartResizeRatio: " << (float)e->size().width() / e->size().height();
+                qDebug() << "To H" << maxToH << (float)maxToH.width() / maxToH.height();
 
             eventBlocked = false;
         }
